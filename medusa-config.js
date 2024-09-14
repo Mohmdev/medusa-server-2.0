@@ -35,7 +35,10 @@ module.exports = defineConfig({
     outDir: `./build.admin`,
     backendUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
     storefrontUrl: process.env.STORE_CORS || 'http://localhost:8000',
-    disable: process.env.DISABLE_MEDUSA_ADMIN === 'true', // Optional: if DISABLE_MEDUSA_ADMIN set to `true`, the admin frontend will not be built
+    //
+    // Optional: if set to `true`, the admin frontend will not be built.
+    // Use this where you are not serving the admin (e.g. workerMode: 'worker' and or 'server')
+    disable: process.env.DISABLE_MEDUSA_ADMIN === 'true' || false,
   },
   modules: {
     [Modules.EVENT_BUS]: {
