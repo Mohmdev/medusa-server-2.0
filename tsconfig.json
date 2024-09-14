@@ -22,6 +22,6 @@
   "ts-node": {
     "swc": true
   },
-  "include": ["medusa-config.*"],
+  "include": ["medusa-config.*", "src/**/*"],
   "exclude": ["**/__tests__", "**/__fixtures__", "node_modules", "build", ".cache"]
 }

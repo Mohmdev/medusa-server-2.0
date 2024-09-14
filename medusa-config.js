@@ -1,25 +1,33 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/utils';
 // import { defineRouteConfig, defineWidgetConfig } from '@medusajs/admin-sdk';
 
-loadEnv(process.env.NODE_ENV, process.cwd());
+const NODE_ENV = process.env.NODE_ENV || 'development';
+loadEnv(NODE_ENV, process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
-    databaseUrl: process.env.DATABASE_URL,
-    databaseDriverOptions: process.env.NODE_ENV !== 'development' ? { ssl: { rejectUnauthorized: false } } : {},
+    workerMode: process.env.WORKER_MODE || 'shared',
     redisUrl: process.env.REDIS_URL,
-    workerMode: 'shared',
+    databaseUrl: process.env.DATABASE_URL,
+    databaseDriverOptions: NODE_ENV ? { ssl: { rejectUnauthorized: false } } : {},
     http: {
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
-      storeCors: process.env.STORE_CORS,
-      adminCors: process.env.ADMIN_CORS,
-      authCors: process.env.AUTH_CORS,
+      storeCors: process.env.STORE_CORS || 'http://localhost:8000',
+      adminCors: process.env.ADMIN_CORS || 'http://localhost:7001,http://localhost:9000',
+      authCors: process.env.AUTH_CORS || 'http://localhost:7001,http://localhost:8000,http://localhost:9000',
       authMethodsPerActor: {
-        user: ['emailpass', 'me'],
-        users: ['emailpass', 'me'],
-        customer: ['emailpass', 'google', 'outlook'],
+        user: ['emailpass'],
+        users: ['emailpass'],
+        customer: ['emailpass'],
       },
+    },
+    // Optional
+    httpCompression: {
+      enabled: true,
+      level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values: Slower but better compression
+      memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
+      threshold: 1024, // minimum size (in bytes) for a response to be compressed
     },
   },
   admin: {
