@@ -32,9 +32,10 @@ module.exports = defineConfig({
   },
   admin: {
     path: '/dashboard',
-    backendUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
     outDir: `./build.admin`,
+    backendUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
     storefrontUrl: process.env.STORE_CORS || 'http://localhost:8000',
+    disable: process.env.DISABLE_MEDUSA_ADMIN === 'true', // Optional: if DISABLE_MEDUSA_ADMIN set to `true`, the admin frontend will not be built
   },
   modules: {
     [Modules.EVENT_BUS]: {
