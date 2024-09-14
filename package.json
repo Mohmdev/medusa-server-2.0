@@ -41,6 +41,7 @@
     "@medusajs/event-bus-redis": "preview",
     "@medusajs/file": "preview",
     "@medusajs/file-local-next": "preview",
+    "@medusajs/file-s3": "preview",
     "@medusajs/fulfillment": "preview",
     "@medusajs/fulfillment-manual": "preview",
     "@medusajs/inventory-next": "preview",

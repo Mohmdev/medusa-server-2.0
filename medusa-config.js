@@ -75,5 +75,26 @@ module.exports = defineConfig({
         ],
       },
     },
+    [Modules.FILE]: {
+      resolve: '@medusajs/file',
+      options: {
+        providers: [
+          {
+            resolve: '@medusajs/file-s3',
+            id: 's3',
+            // MinIO specfic configuration
+            options: {
+              endpoint: process.env.S3_ENDPOINT,
+              bucket: process.env.S3_BUCKET,
+              access_key_id: process.env.S3_ACCESS_KEY_ID,
+              secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
+              region: 'eu-west-1', // dummy region since MinIO does not use regions
+              file_url: `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}`,
+              // other S3 specific options...
+            },
+          },
+        ],
+      },
+    },
   },
 });
