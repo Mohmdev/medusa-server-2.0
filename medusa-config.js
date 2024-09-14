@@ -25,7 +25,7 @@ module.exports = defineConfig({
     // Optional
     httpCompression: {
       enabled: true,
-      level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values: Slower but better compression
+      level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values = Slower but better compression
       memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
       threshold: 1024, // minimum size (in bytes) for a response to be compressed
     },
