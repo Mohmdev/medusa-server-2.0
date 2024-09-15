@@ -81,7 +81,7 @@
     "medusa-test-utils": "preview",
     "prop-types": "^15.8.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.1.6"
+    "typescript": "5.1.6"
   },
   "resolutions": {
     "**/@medusajs/medusa-cli": "link:./node_modules/@medusajs/medusa-cli"

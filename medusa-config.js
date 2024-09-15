@@ -86,11 +86,14 @@ module.exports = defineConfig({
             options: {
               endpoint: process.env.S3_ENDPOINT,
               bucket: process.env.S3_BUCKET,
-              access_key_id: process.env.S3_ACCESS_KEY_ID,
-              secret_access_key: process.env.S3_SECRET_ACCESS_KEY,
-              region: 'eu-west-1', // dummy region since MinIO does not use regions
+              access_key_id: process.env.S3_ACCESS_KEY,
+              secret_access_key: process.env.S3_SECRET_KEY,
               file_url: `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}`,
-              // other S3 specific options...
+              region: process.env.S3_REGION || 'us-east-1', // dummy region as setting the region is optional in MinIO bucket configuration
+              additional_client_config: {
+                forcePathStyle: true, // This is mandatory for MinIO else the bucket name will be prefixed to the URL
+              },
+              // other S3 specific configuration...
             },
           },
         ],
