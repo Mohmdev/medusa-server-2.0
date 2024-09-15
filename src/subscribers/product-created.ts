@@ -1,10 +1,20 @@
 import type { SubscriberArgs, SubscriberConfig } from '@medusajs/medusa';
 import { ModuleRegistrationName } from '@medusajs/utils';
-import { INotificationModuleService } from '@medusajs/types';
+import { INotificationModuleService, IProductModuleService } from '@medusajs/types';
 
 // subscriber function
-export default async function productCreateHandler({ event: { data }, container }: SubscriberArgs<{ id: string }>) {
+export default async function productCreateHandler({
+  event: { data },
+  container,
+}: //
+SubscriberArgs<{ id: string }>) {
+  // notification module service
   const notificationModuleService: INotificationModuleService = container.resolve(ModuleRegistrationName.NOTIFICATION);
+
+  // product module service
+  const productModuleService: IProductModuleService = container.resolve(ModuleRegistrationName.PRODUCT);
+  const productId = data.id;
+  const product = await productModuleService.retrieveProduct(productId);
 
   await notificationModuleService.createNotifications([
     {
@@ -23,7 +33,7 @@ export default async function productCreateHandler({ event: { data }, container 
     },
   ]);
 
-  console.log('A product was created');
+  console.log(`The product ${product.title} was created`);
 }
 
 // subscriber config
