@@ -116,4 +116,34 @@ module.exports = defineConfig({
       },
     },
   },
+  // plugins: [
+  //   {
+  //     resolve: `node_modules/medusa-plugin-meilisearch`,
+  //     options: {
+  //       config: {
+  //         host: process.env.MEILISEARCH_HOST,
+  //         apiKey: process.env.MEILISEARCH_API_KEY,
+  //       },
+  //       settings: {
+  //         products: {
+  //           indexSettings: {
+  //             searchableAttributes: ['title', 'description', 'variant_sku'],
+  //             displayedAttributes: ['id', 'title', 'description', 'variant_sku', 'thumbnail', 'handle'],
+  //           },
+  //           primaryKey: 'id',
+  //           transformer: (product) => ({
+  //             id: product.id,
+  //             title: product.title,
+  //             description: product.description,
+  //             variant_sku: product.variant_sku,
+  //             thumbnail: product.thumbnail,
+  //             handle: product.handle,
+  //             // other attributes...
+  //           }),
+  //         },
+  //       },
+  //     },
+  //   },
+  //   // ...
+  // ],
 });

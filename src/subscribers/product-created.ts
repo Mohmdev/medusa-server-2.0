@@ -1,5 +1,5 @@
 import type { SubscriberArgs, SubscriberConfig } from '@medusajs/medusa';
-import { ModuleRegistrationName } from '@medusajs/utils';
+import { Modules } from '@medusajs/utils';
 import { INotificationModuleService, IProductModuleService } from '@medusajs/types';
 
 // subscriber function
@@ -9,10 +9,10 @@ export default async function productCreateHandler({
 }: //
 SubscriberArgs<{ id: string }>) {
   // notification module service
-  const notificationModuleService: INotificationModuleService = container.resolve(ModuleRegistrationName.NOTIFICATION);
+  const notificationModuleService: INotificationModuleService = container.resolve(Modules.NOTIFICATION);
 
   // product module service
-  const productModuleService: IProductModuleService = container.resolve(ModuleRegistrationName.PRODUCT);
+  const productModuleService: IProductModuleService = container.resolve(Modules.PRODUCT);
   const productId = data.id;
   const product = await productModuleService.retrieveProduct(productId);
 
