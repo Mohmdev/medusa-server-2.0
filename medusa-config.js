@@ -99,24 +99,33 @@ module.exports = defineConfig({
         ],
       },
     },
-    [Modules.NOTIFICATION]: {
-      resolve: '@medusajs/notification',
-      options: {
-        providers: [
-          {
-            resolve: '@medusajs/notification-sendgrid',
-            id: 'sendgrid',
-            options: {
-              channels: ['email'], // Only one provider can be defined per channel
-              api_key: process.env.SENDGRID_API_KEY,
-              from: process.env.SENDGRID_FROM,
-            },
-          },
-        ],
-      },
-    },
+    // Bug: Product export workflow fails when eaither of the providers are enabled
+    // [Modules.NOTIFICATION]: {
+    //   resolve: '@medusajs/notification',
+    //   options: {
+    //     providers: [
+    //       // {
+    //       //   resolve: '@medusajs/notification-sendgrid',
+    //       //   id: 'sendgrid',
+    //       //   options: {
+    //       //     channels: ['email'], // Only one provider can be defined per channel
+    //       //     api_key: process.env.SENDGRID_API_KEY,
+    //       //     from: process.env.SENDGRID_FROM,
+    //       //   },
+    //       // },
+    //       {
+    //         resolve: '@medusajs/notification-local',
+    //         id: 'local',
+    //         options: {
+    //           channels: ['email'],
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
   },
   // plugins: [
+  // Waiting for the plugin to be published
   //   {
   //     resolve: `node_modules/medusa-plugin-meilisearch`,
   //     options: {
