@@ -27,7 +27,10 @@ paths = ['/app/node_modules/.bin']
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['yarn run build']
+cmds = [
+  'yarn run update-deps',
+  'yarn run build'
+]
 cacheDirectories = ['node_modules/.cache']
 
 [start]

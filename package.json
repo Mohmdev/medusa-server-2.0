@@ -21,6 +21,7 @@
     "dev": "medusa develop",
     "start": "medusa start",
     "start:cluster": "medusa start-cluster",
+    "update-deps": "yarn up",
     "deploy": "yarn run migrate && yarn run start",
     "telemetry:disable": "medusa telemetry --disable",
     "test:integration:http": "TEST_TYPE=integration:http NODE_OPTIONS=--experimental-vm-modules jest --silent=false --runInBand --forceExit",
