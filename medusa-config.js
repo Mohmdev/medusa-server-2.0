@@ -1,5 +1,6 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/utils';
 // import { defineRouteConfig, defineWidgetConfig } from '@medusajs/admin-sdk';
+// import { createHtmlPlugin } from 'vite-plugin-html';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 loadEnv(NODE_ENV, process.cwd());
@@ -39,6 +40,22 @@ module.exports = defineConfig({
     // Optional: if set to `true`, the admin frontend will not be built.
     // Use this where you are not serving the admin (e.g. workerMode: 'worker' and or 'server')
     disable: process.env.DISABLE_MEDUSA_ADMIN === 'true' || false,
+    // Vite configuration
+    // vite: (config) => {
+    //   config.plugins.push(
+    //     createHtmlPlugin({
+    //       inject: {
+    //         injectData: {
+    //           head: `
+    //             <link rel="icon" href="/path/to/your/favicon.ico" />
+    //             <!-- Add other custom head elements here -->
+    //           `,
+    //         },
+    //       },
+    //     })
+    //   );
+    //   return config;
+    // },
   },
   modules: {
     [Modules.EVENT_BUS]: {

@@ -7,14 +7,11 @@ A scheduled job is created in a TypeScript or JavaScript file under the `src/job
 For example, create the file `src/jobs/hello-world.ts` with the following content:
 
 ```ts
-import {
-  IProductModuleService,
-  MedusaContainer
-} from "@medusajs/types";
-import { ModuleRegistrationName } from "@medusajs/utils";
+import { IProductModuleService, MedusaContainer } from '@medusajs/types';
+import { Modules } from '@medusajs/utils';
 
 export default async function myCustomJob(container: MedusaContainer) {
-  const productService: IProductModuleService = container.resolve(ModuleRegistrationName.PRODUCT)
+  const productService: IProductModuleService = container.resolve(Modules.PRODUCT);
 
   const products = await productService.listAndCountProducts();
 
@@ -22,8 +19,8 @@ export default async function myCustomJob(container: MedusaContainer) {
 }
 
 export const config = {
-  name: "daily-product-report",
-  schedule: "0 0 * * *", // Every day at midnight
+  name: 'daily-product-report',
+  schedule: '0 0 * * *', // Every day at midnight
 };
 ```
 
