@@ -2630,11 +2630,9 @@
 
 "@medusajs/medusa-cli@1.3.23-preview-20240925143312":
   version "0.0.0"
-  uid ""
 
 "@medusajs/medusa-cli@link:./node_modules/@medusajs/medusa-cli":
   version "0.0.0"
-  uid ""
 
 "@medusajs/medusa-cli@preview":
   version "1.3.23-preview-20240925143312"
@@ -2715,6 +2713,20 @@
     "@medusajs/utils" "1.12.0-preview-20240925143312"
     resolve-cwd "^3.0.0"
 
+"@medusajs/modules-sdk@1.13.0-snapshot-20240925105124":
+  version "1.13.0-snapshot-20240925105124"
+  resolved "https://registry.yarnpkg.com/@medusajs/modules-sdk/-/modules-sdk-1.13.0-snapshot-20240925105124.tgz#f8016603a210b3ed395d528d8acf29f2737b60e9"
+  integrity sha512-48hLHwHixFZzyaQtLNrHsWCrY9wI3Z3swmEVgdb2RfbAT12Hyd/ZJlzRyn1QhplSy5IYdgVxcgankRkFTnW02g==
+  dependencies:
+    "@graphql-codegen/core" "^4.0.2"
+    "@graphql-codegen/typescript" "^4.0.9"
+    "@graphql-tools/merge" "^9.0.0"
+    "@graphql-tools/schema" "^10.0.6"
+    "@medusajs/orchestration" "0.5.8-snapshot-20240925105124"
+    "@medusajs/types" "1.12.0-snapshot-20240925105124"
+    "@medusajs/utils" "1.12.0-snapshot-20240925105124"
+    resolve-cwd "^3.0.0"
+
 "@medusajs/notification-local@preview":
   version "0.0.2-preview-20240925143312"
   resolved "https://registry.yarnpkg.com/@medusajs/notification-local/-/notification-local-0.0.2-preview-20240925143312.tgz#930c3d83dc83c5d3c9e2ecce1ff5089ca7527917"
@@ -2731,12 +2743,12 @@
     "@sendgrid/mail" "^8.1.3"
 
 "@medusajs/notification@preview":
-  version "0.1.3-preview-20240925143312"
-  resolved "https://registry.yarnpkg.com/@medusajs/notification/-/notification-0.1.3-preview-20240925143312.tgz#d036482a0510323acc3569e6a8bb7e8698f02e75"
-  integrity sha512-d+3GKNfaIRpenkx0ES/IDcLzj88mNSrs1Skr1uIyoN3EZ5ZiX5x9un4E+Qn/um2B9Dsk9MDNdpe4lJNiWUNqKg==
+  version "0.1.3-snapshot-20240925105124"
+  resolved "https://registry.yarnpkg.com/@medusajs/notification/-/notification-0.1.3-snapshot-20240925105124.tgz#3ddad5f3870db575a10b20a054f3b65d15280d64"
+  integrity sha512-jkXk260UNJa8R7iPLJQEsSy6gXC1+q2ysRB3HQd0y3W87hogoTUMdQuyMKzg+aO4HlGtFJZkqaEXNvEaCD1rnA==
   dependencies:
-    "@medusajs/modules-sdk" "1.13.0-preview-20240925143312"
-    "@medusajs/utils" "1.12.0-preview-20240925143312"
+    "@medusajs/modules-sdk" "1.13.0-snapshot-20240925105124"
+    "@medusajs/utils" "1.12.0-snapshot-20240925105124"
 
 "@medusajs/orchestration@0.5.8-preview-20240925143312":
   version "0.5.8-preview-20240925143312"
@@ -2744,6 +2756,14 @@
   integrity sha512-Ja951tAmj7DStHqr6ipi8E3F33FEuzmdtTHRZeCCN2b8YK0DaQWYPjgQFCVT8DLzoagOSew8F/e2OHwGzGbvXQ==
   dependencies:
     "@medusajs/utils" "1.12.0-preview-20240925143312"
+
+"@medusajs/orchestration@0.5.8-snapshot-20240925105124":
+  version "0.5.8-snapshot-20240925105124"
+  resolved "https://registry.yarnpkg.com/@medusajs/orchestration/-/orchestration-0.5.8-snapshot-20240925105124.tgz#e995d5d55efc3776f42dbfab04417e03ad7fb172"
+  integrity sha512-mUfLHgI/1xEpo+Jm32IA6fn2G7/JZSzUB8JZp0CKOaG5zkHUKmNOnH3R5IcptyNXcLvQyZhCMneuFikWA2BcxA==
+  dependencies:
+    "@medusajs/types" "1.12.0-snapshot-20240925105124"
+    "@medusajs/utils" "1.12.0-snapshot-20240925105124"
 
 "@medusajs/order@preview":
   version "0.1.3-preview-20240925143312"
@@ -2822,6 +2842,11 @@
   resolved "https://registry.yarnpkg.com/@medusajs/types/-/types-1.12.0-preview-20240925143312.tgz#310d63e515e4538946281ec660237ae4ab436466"
   integrity sha512-ke9c0PO4F0ISTju+5X3b+/vC3GTtgtdjH2Wg3RrFHz7DrILqxxhUjU+VxYjiag8pHOds0vam0EBjS/gi3VreSw==
 
+"@medusajs/types@1.12.0-snapshot-20240925105124":
+  version "1.12.0-snapshot-20240925105124"
+  resolved "https://registry.yarnpkg.com/@medusajs/types/-/types-1.12.0-snapshot-20240925105124.tgz#3e0f4ae5003be5b27558462b20ccc34d9cadade1"
+  integrity sha512-tFBS+yDIs3qoiahAMPktqIAy5eQs2wJLHr7hx40LDSJo10yGVjyVO2xKjKmnF1XRloiwYr7On0aIPWgG5AY5Aw==
+
 "@medusajs/ui@3.0.1-preview-20240925143312":
   version "3.0.1-preview-20240925143312"
   resolved "https://registry.yarnpkg.com/@medusajs/ui/-/ui-3.0.1-preview-20240925143312.tgz#0ef81f2a63635cc9351d4bfdaad440983ebf8ca8"
@@ -2884,6 +2909,22 @@
     graphql "^16.9.0"
     jsonwebtoken "^9.0.2"
     pg "^8.13.0"
+    pg-connection-string "^2.7.0"
+    pluralize "^8.0.0"
+    ulid "^2.3.0"
+
+"@medusajs/utils@1.12.0-snapshot-20240925105124":
+  version "1.12.0-snapshot-20240925105124"
+  resolved "https://registry.yarnpkg.com/@medusajs/utils/-/utils-1.12.0-snapshot-20240925105124.tgz#461643b1fc1b609de02f3359b103236396c33899"
+  integrity sha512-Pknuh3oQOPpUKyIGxvs/Ebqk1Ansco2aqpP1nrPtW13LUGeFcxrmiLH8Nidqmy3y1W8rJBiAqGztc6vITlCrmQ==
+  dependencies:
+    "@graphql-tools/merge" "^9.0.7"
+    "@graphql-tools/schema" "^10.0.6"
+    "@medusajs/types" "1.12.0-snapshot-20240925105124"
+    dotenv "^16.4.5"
+    dotenv-expand "^11.0.6"
+    graphql "^16.9.0"
+    jsonwebtoken "^9.0.2"
     pg-connection-string "^2.7.0"
     pluralize "^8.0.0"
     ulid "^2.3.0"
