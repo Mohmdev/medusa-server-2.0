@@ -1,11 +1,9 @@
 /dist
 .env
 .DS_Store
+/uploads
 /node_modules
 yarn-error.log
-
-uploads/*
-!uploads/.gitkeep
 
 .idea
 
@@ -14,13 +12,10 @@ coverage
 !src/**
 
 ./tsconfig.tsbuildinfo
-package-lock.json
-# yarn.lock
 medusa-db.sql
 build
 build.admin
 .cache
-readme.draft.md
 
 .yarn/*
 !.yarn/patches
@@ -29,4 +24,4 @@ readme.draft.md
 !.yarn/sdks
 !.yarn/versions
 
-# .medusa
+.medusa

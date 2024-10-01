@@ -1,15 +1,15 @@
 providers = []
-buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1725321821'
+buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1727136237'
 
 [variables]
 CI = 'true'
+NIXPACKS_METADATA = 'node'
 NODE_ENV = 'production'
 NPM_CONFIG_PRODUCTION = 'true'
-# NIXPACKS_METADATA = 'node'
 
 
 [phases.setup]
-nixPkgs = ['nodejs_22', 'yarn-1_x', 'openssl']
+nixPkgs = ['nodejs_22', 'yarn-1_x']
 nixOverlays = [
   'https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz',
 ]
@@ -27,6 +27,7 @@ paths = ['/app/node_modules/.bin']
 dependsOn = ['install']
 cmds = ['yarn run build']
 cacheDirectories = ['node_modules/.cache']
+
 
 [start]
 cmd = 'yarn run deploy'

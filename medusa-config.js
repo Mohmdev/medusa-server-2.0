@@ -1,6 +1,4 @@
-import { loadEnv, defineConfig, Modules } from '@medusajs/utils';
-// import { defineRouteConfig, defineWidgetConfig } from '@medusajs/admin-sdk';
-// import { createHtmlPlugin } from 'vite-plugin-html';
+import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 loadEnv(NODE_ENV, process.cwd());
@@ -15,13 +13,8 @@ module.exports = defineConfig({
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
       storeCors: process.env.STORE_CORS || 'http://localhost:8000',
-      adminCors: process.env.ADMIN_CORS || 'http://localhost:7001,http://localhost:9000',
-      authCors: process.env.AUTH_CORS || 'http://localhost:7001,http://localhost:8000,http://localhost:9000',
-      authMethodsPerActor: {
-        user: ['emailpass'],
-        users: ['emailpass'],
-        customer: ['emailpass'],
-      },
+      adminCors: process.env.ADMIN_CORS || 'http://localhost:9000',
+      authCors: process.env.AUTH_CORS || 'http://localhost:8000,http://localhost:9000',
     },
     // Optional
     httpCompression: {
@@ -40,64 +33,34 @@ module.exports = defineConfig({
     // Optional: if set to `true`, the admin frontend will not be built.
     // Use this where you are not serving the admin (e.g. workerMode: 'worker' and or 'server')
     disable: process.env.DISABLE_MEDUSA_ADMIN === 'true' || false,
-    // Vite configuration
-    // vite: (config) => {
-    //   config.plugins.push(
-    //     createHtmlPlugin({
-    //       inject: {
-    //         injectData: {
-    //           head: `
-    //             <link rel="icon" href="/path/to/your/favicon.ico" />
-    //             <!-- Add other custom head elements here -->
-    //           `,
-    //         },
-    //       },
-    //     })
-    //   );
-    //   return config;
-    // },
   },
   modules: {
-    [Modules.EVENT_BUS]: {
-      resolve: '@medusajs/event-bus-redis',
+    [Modules.CACHE]: {
+      resolve: '@medusajs/medusa/cache-redis',
       options: {
         redisUrl: process.env.REDIS_URL,
       },
     },
-    [Modules.CACHE]: {
-      resolve: '@medusajs/cache-redis',
+    [Modules.EVENT_BUS]: {
+      resolve: '@medusajs/medusa/event-bus-redis',
       options: {
         redisUrl: process.env.REDIS_URL,
       },
     },
     [Modules.WORKFLOW_ENGINE]: {
-      resolve: '@medusajs/workflow-engine-redis',
+      resolve: '@medusajs/medusa/workflow-engine-redis',
       options: {
         redis: {
           url: process.env.REDIS_URL,
         },
       },
     },
-    [Modules.AUTH]: {
-      resolve: '@medusajs/auth',
-      options: {
-        providers: [
-          {
-            resolve: '@medusajs/auth-emailpass',
-            id: 'emailpass',
-            options: {
-              // provider options...
-            },
-          },
-        ],
-      },
-    },
     [Modules.FILE]: {
-      resolve: '@medusajs/file',
+      resolve: '@medusajs/medusa/file',
       options: {
         providers: [
           {
-            resolve: '@medusajs/file-s3',
+            resolve: '@medusajs/medusa/file-s3',
             id: 's3',
             // MinIO specfic configuration
             options: {
@@ -116,60 +79,5 @@ module.exports = defineConfig({
         ],
       },
     },
-    // Bug: Product export workflow fails when eaither of the providers are enabled
-    // [Modules.NOTIFICATION]: {
-    //   resolve: '@medusajs/notification',
-    //   options: {
-    //     providers: [
-    //       // {
-    //       //   resolve: '@medusajs/notification-sendgrid',
-    //       //   id: 'sendgrid',
-    //       //   options: {
-    //       //     channels: ['email'], // Only one provider can be defined per channel
-    //       //     api_key: process.env.SENDGRID_API_KEY,
-    //       //     from: process.env.SENDGRID_FROM,
-    //       //   },
-    //       // },
-    //       {
-    //         resolve: '@medusajs/notification-local',
-    //         id: 'local',
-    //         options: {
-    //           channels: ['email'],
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
   },
-  // plugins: [
-  // Waiting for the plugin to be published
-  //   {
-  //     resolve: `node_modules/medusa-plugin-meilisearch`,
-  //     options: {
-  //       config: {
-  //         host: process.env.MEILISEARCH_HOST,
-  //         apiKey: process.env.MEILISEARCH_API_KEY,
-  //       },
-  //       settings: {
-  //         products: {
-  //           indexSettings: {
-  //             searchableAttributes: ['title', 'description', 'variant_sku'],
-  //             displayedAttributes: ['id', 'title', 'description', 'variant_sku', 'thumbnail', 'handle'],
-  //           },
-  //           primaryKey: 'id',
-  //           transformer: (product) => ({
-  //             id: product.id,
-  //             title: product.title,
-  //             description: product.description,
-  //             variant_sku: product.variant_sku,
-  //             thumbnail: product.thumbnail,
-  //             handle: product.handle,
-  //             // other attributes...
-  //           }),
-  //         },
-  //       },
-  //     },
-  //   },
-  //   // ...
-  // ],
 });
