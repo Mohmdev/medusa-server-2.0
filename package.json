@@ -43,6 +43,7 @@
     "@medusajs/file": "preview",
     "@medusajs/file-local-next": "preview",
     "@medusajs/file-s3": "preview",
+    "@medusajs/framework": "preview",
     "@medusajs/fulfillment": "preview",
     "@medusajs/fulfillment-manual": "preview",
     "@medusajs/inventory-next": "preview",
