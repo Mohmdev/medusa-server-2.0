@@ -12,20 +12,25 @@ const animateDots = (message, interval = 500) => {
 
 const deleteFolderRecursive = (folderPath, folderName) => {
   if (fs.existsSync(folderPath)) {
-    const animation = animateDots(`Deleting directory "${folderName}"`);
-    fs.readdirSync(folderPath).forEach((file) => {
-      const currentPath = path.join(folderPath, file);
-      if (fs.lstatSync(currentPath).isDirectory()) {
-        // Recurse
-        deleteFolderRecursive(currentPath, folderName);
-      } else {
-        // Delete file
-        fs.unlinkSync(currentPath);
-      }
-    });
-    fs.rmdirSync(folderPath);
+    const animation = animateDots(`Removing "${folderName}"`);
+
+    // Delete files and folders recursively
+    const deleteFilesAndFolders = (currentPath) => {
+      fs.readdirSync(currentPath).forEach((file) => {
+        const filePath = path.join(currentPath, file);
+        if (fs.lstatSync(filePath).isDirectory()) {
+          deleteFilesAndFolders(filePath);
+        } else {
+          fs.unlinkSync(filePath); // Delete file
+        }
+      });
+      fs.rmdirSync(currentPath); // Remove empty folder
+    };
+
+    deleteFilesAndFolders(folderPath);
+
     clearInterval(animation);
-    console.log(`\rDeleted directory "${folderName}".`);
+    console.log(`\rDirectory "${folderName}" was removed successfully.`);
   } else {
     console.log(`Directory "${folderName}" does not exist. Skipping...`);
   }
@@ -33,12 +38,12 @@ const deleteFolderRecursive = (folderPath, folderName) => {
 
 const deleteFile = (filePath, fileName) => {
   if (fs.existsSync(filePath)) {
-    const animation = animateDots(`Deleting lockfile "${fileName}"`);
+    const animation = animateDots(`Removing "${fileName}"`);
     fs.unlinkSync(filePath);
     clearInterval(animation);
-    console.log(`\rDeleted lockfile "${fileName}".`);
+    console.log(`\r"${fileName}" was removed successfully.`);
   } else {
-    console.log(`Lockfile "${fileName}" does not exist. Skipping...`);
+    console.log(`"${fileName}" does not exist. Skipping...`);
   }
 };
 
