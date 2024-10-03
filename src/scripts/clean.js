@@ -60,7 +60,7 @@ deleteFolderRecursive(path.join(rootDir, 'node_modules'), 'node_modules');
 deleteFolderRecursive(path.join(rootDir, 'build.admin'), 'build.admin');
 
 // Remove .dist directory
-deleteFolderRecursive(path.join(rootDir, '.dist'), '.dist');
+deleteFolderRecursive(path.join(rootDir, 'dist'), 'dist');
 
 // Remove yarn.lock file
 deleteFile(path.join(rootDir, 'yarn.lock'), 'yarn.lock');
