@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: 'yarn'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+      time: '02:00'
+    allow:
+      - dependency-type: production
+    groups:
+      medusa:
+        patterns:
+          - '@medusajs*'
+          - 'medusa*'
+        update-types:
+          - 'minor'
+          - 'patch'
+    ignore:
+      - dependency-name: '@medusajs*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: 'medusa*'
+        update-types: ['version-update:semver-major']
+      - dependency-name: '@mikro-orm/*'
+        update-types: ['all']
