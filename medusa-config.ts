@@ -5,7 +5,7 @@ loadEnv(NODE_ENV, process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
-    workerMode: process.env.WORKER_MODE || 'shared',
+    workerMode: 'shared',
     redisUrl: process.env.REDIS_URL,
     databaseUrl: process.env.DATABASE_URL,
     databaseDriverOptions: NODE_ENV ? { ssl: { rejectUnauthorized: false } } : {},
@@ -15,18 +15,17 @@ module.exports = defineConfig({
       storeCors: process.env.STORE_CORS || 'http://localhost:8000',
       adminCors: process.env.ADMIN_CORS || 'http://localhost:9000',
       authCors: process.env.AUTH_CORS || 'http://localhost:8000,http://localhost:9000',
-    },
-    // Optional
-    httpCompression: {
-      enabled: true,
-      level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values = Slower but better compression
-      memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
-      threshold: 1024, // minimum size (in bytes) for a response to be compressed
+      // Optional
+      compression: {
+        enabled: true,
+        level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values = Slower but better compression
+        memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
+        threshold: 1024, // minimum size (in bytes) for a response to be compressed
+      },
     },
   },
   admin: {
     path: '/dashboard',
-    outDir: `./build.admin`,
     backendUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
     storefrontUrl: process.env.STORE_CORS || 'http://localhost:8000',
     //

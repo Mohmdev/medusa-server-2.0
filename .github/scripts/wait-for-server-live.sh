@@ -1,29 +1,29 @@
 #!/bin/bash
 
-# Number of attempts
-max_attempts=6
-
-for i in $(seq 1 $max_attempts)
+for i in {1..6}
 do
-  echo "Attempt $i"
+  echo $i
   status_code=$(curl \
     -X GET \
     --write-out %{http_code} \
     --silent\
     --output /dev/null\
-    https://server-medusa.up.railway.app/store/products)
+    http://localhost:9000/store/products)
 
-  echo "Status code: $status_code"
-  if [[ "$status_code" -eq 200 ]] ; then
-    echo "Server is live"
+echo $status_code
+  if [[ "$status_code" -ne 000 ]] ; then
+    echo "exiting"
     exit 0
   else
-    echo "Server returned status code $status_code"
     sleep 5
   fi
 done
 
 echo $status_code
 
-echo "Server did not respond after $max_attempts attempts"
-exit 1
+if [[ "$status_code" =  000 ]] ; then
+  echo "Site status changed to $status_code"
+  exit 1
+else
+  exit 0
+fi
