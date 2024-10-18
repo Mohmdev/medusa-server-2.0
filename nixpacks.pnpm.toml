@@ -26,9 +26,9 @@ paths = ['/app/node_modules/.bin']
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['medusa build']
+cmds = ['pnpm run build']
 cacheDirectories = ['node_modules/.cache']
 
 
 [start]
-cmd = 'medusa db:migrate && medusa start'
+cmd = 'pnpm run deploy'
