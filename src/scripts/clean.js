@@ -62,8 +62,12 @@ deleteFolderRecursive(path.join(rootDir, 'build.admin'), 'build.admin');
 // Remove .dist directory
 deleteFolderRecursive(path.join(rootDir, 'dist'), 'dist');
 
+// Remove package-lock.json file
+deleteFile(path.join(rootDir, 'package-lock.json'), 'package-lock.json');
 // Remove yarn.lock file
 deleteFile(path.join(rootDir, 'yarn.lock'), 'yarn.lock');
+// Remove pnpm-lock.yaml file
+deleteFile(path.join(rootDir, 'pnpm-lock.yaml'), 'pnpm-lock.yaml');
 
 // Final result message
 console.log('Workspace is ready for fresh packages.');
