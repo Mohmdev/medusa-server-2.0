@@ -1,13 +1,12 @@
-import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
+import { loadEnv, defineConfig } from '@medusajs/framework/utils';
 
-// const NODE_ENV = process.env.NODE_ENV || 'development';
-// loadEnv(NODE_ENV, process.cwd());
-loadEnv(process.env.NODE_ENV || 'development', process.cwd());
+const NODE_ENV = process.env.NODE_ENV || 'development';
+loadEnv(NODE_ENV, process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
     databaseUrl: process.env.DATABASE_URL,
-    databaseDriverOptions: process.env.NODE_ENV !== 'development' ? { ssl: { rejectUnauthorized: false } } : {},
+    databaseDriverOptions: NODE_ENV !== 'development' ? { ssl: { rejectUnauthorized: false } } : {},
     redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
     workerMode: (process.env.WORKER_MODE as 'shared' | 'worker' | 'server') || 'shared',
     http: {
@@ -79,30 +78,9 @@ module.exports = defineConfig({
         ],
       },
     },
-    // {
-    //   resolve: '@medusajs/medusa/locking',
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: '@medusajs/medusa/locking-redis',
-    //         id: 's3',
-    //         // MinIO specfic configuration
-    //         options: {
-    //           endpoint: process.env.S3_ENDPOINT,
-    //           bucket: process.env.S3_BUCKET,
-    //           access_key_id: process.env.S3_ACCESS_KEY,
-    //           secret_access_key: process.env.S3_SECRET_KEY,
-    //           file_url: `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}`,
-    //           region: process.env.S3_REGION || 'us-east-1', // dummy region as setting the region is optional in MinIO bucket configuration
-    //           additional_client_config: {
-    //             forcePathStyle: true, // This is mandatory for MinIO else the bucket name will be prefixed to the URL
-    //           },
-    //           // other S3 specific configuration...
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      resolve: './src/modules/brand',
+    },
     // [Modules.PAYMENT]: {
     //   resolve: '@medusajs/medusa/payment',
     //   options: {
