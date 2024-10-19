@@ -1,10 +1,10 @@
-providers = []
+providers = ['node']
 buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1727136237'
 
 [variables]
 CI = 'true'
 NIXPACKS_METADATA = 'node'
-NODE_ENV = 'production'
+NODE_ENV = 'development'
 NPM_CONFIG_PRODUCTION = 'true'
 
 
@@ -18,16 +18,16 @@ nixpkgsArchive = 'e05605ec414618eab4a7a6aea8b38f6fbbcc8f08'
 
 [phases.install]
 dependsOn = ['setup']
-cmds = ['yarn install --check-cache']
+cmds = ['yarn install --frozen-lockfile']
 cacheDirectories = ['/usr/local/share/.cache/yarn/v6']
 paths = ['/app/node_modules/.bin']
 
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['yarn run build']
+cmds = ['medusa build']
 cacheDirectories = ['node_modules/.cache']
 
 
 [start]
-cmd = 'yarn run deploy'
+cmd = 'medusa db:migrate && medusa start -p 9000'

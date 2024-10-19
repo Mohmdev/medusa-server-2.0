@@ -5,7 +5,7 @@ buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1727136237'
 [variables]
 CI = 'true'
 NIXPACKS_METADATA = 'node'
-NODE_ENV = 'production'
+NODE_ENV = 'development'
 NPM_CONFIG_PRODUCTION = 'true'
 
 
@@ -26,9 +26,9 @@ paths = ['/app/node_modules/.bin']
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['pnpm run build']
+cmds = ['medusa build']
 cacheDirectories = ['node_modules/.cache']
 
 
 [start]
-cmd = 'pnpm run deploy'
+cmd = 'medusa db:migrate && medusa start -p 9000'

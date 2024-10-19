@@ -1,14 +1,15 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-loadEnv(NODE_ENV, process.cwd());
+// const NODE_ENV = process.env.NODE_ENV || 'development';
+// loadEnv(NODE_ENV, process.cwd());
+loadEnv(process.env.NODE_ENV || 'development', process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
-    workerMode: 'shared',
-    redisUrl: process.env.REDIS_URL,
     databaseUrl: process.env.DATABASE_URL,
-    databaseDriverOptions: NODE_ENV ? { ssl: { rejectUnauthorized: false } } : {},
+    databaseDriverOptions: process.env.NODE_ENV !== 'development' ? { ssl: { rejectUnauthorized: false } } : {},
+    redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
+    workerMode: (process.env.WORKER_MODE as 'shared' | 'worker' | 'server') || 'shared',
     http: {
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
@@ -33,20 +34,20 @@ module.exports = defineConfig({
     // Use this where you are not serving the admin (e.g. workerMode: 'worker' and or 'server')
     disable: process.env.DISABLE_MEDUSA_ADMIN === 'true' || false,
   },
-  modules: {
-    [Modules.CACHE]: {
+  modules: [
+    {
       resolve: '@medusajs/medusa/cache-redis',
       options: {
         redisUrl: process.env.REDIS_URL,
       },
     },
-    [Modules.EVENT_BUS]: {
+    {
       resolve: '@medusajs/medusa/event-bus-redis',
       options: {
         redisUrl: process.env.REDIS_URL,
       },
     },
-    [Modules.WORKFLOW_ENGINE]: {
+    {
       resolve: '@medusajs/medusa/workflow-engine-redis',
       options: {
         redis: {
@@ -54,7 +55,7 @@ module.exports = defineConfig({
         },
       },
     },
-    [Modules.FILE]: {
+    {
       resolve: '@medusajs/medusa/file',
       options: {
         providers: [
@@ -78,6 +79,30 @@ module.exports = defineConfig({
         ],
       },
     },
+    // {
+    //   resolve: '@medusajs/medusa/locking',
+    //   options: {
+    //     providers: [
+    //       {
+    //         resolve: '@medusajs/medusa/locking-redis',
+    //         id: 's3',
+    //         // MinIO specfic configuration
+    //         options: {
+    //           endpoint: process.env.S3_ENDPOINT,
+    //           bucket: process.env.S3_BUCKET,
+    //           access_key_id: process.env.S3_ACCESS_KEY,
+    //           secret_access_key: process.env.S3_SECRET_KEY,
+    //           file_url: `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}`,
+    //           region: process.env.S3_REGION || 'us-east-1', // dummy region as setting the region is optional in MinIO bucket configuration
+    //           additional_client_config: {
+    //             forcePathStyle: true, // This is mandatory for MinIO else the bucket name will be prefixed to the URL
+    //           },
+    //           // other S3 specific configuration...
+    //         },
+    //       },
+    //     ],
+    //   },
+    // },
     // [Modules.PAYMENT]: {
     //   resolve: '@medusajs/medusa/payment',
     //   options: {
@@ -90,5 +115,5 @@ module.exports = defineConfig({
     //     ],
     //   },
     // },
-  },
+  ],
 });
