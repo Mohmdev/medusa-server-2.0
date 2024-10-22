@@ -38,6 +38,7 @@
     "pg": "^8.13.0"
   },
   "devDependencies": {
+    "@medusajs/ui-preset": "rc",
     "@medusajs/test-utils": "rc",
     "@mikro-orm/cli": "5.9.7",
     "@swc/core": "1.5.7",

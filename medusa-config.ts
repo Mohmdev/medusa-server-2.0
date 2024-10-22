@@ -1,4 +1,5 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
+// const { QUOTE_MODULE } = require("./src/modules/quote");
 
 // const NODE_ENV = process.env.NODE_ENV || 'development';
 // loadEnv(NODE_ENV, process.cwd());
@@ -79,41 +80,11 @@ module.exports = defineConfig({
         ],
       },
     },
-    // {
-    //   resolve: '@medusajs/medusa/locking',
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: '@medusajs/medusa/locking-redis',
-    //         id: 's3',
-    //         // MinIO specfic configuration
-    //         options: {
-    //           endpoint: process.env.S3_ENDPOINT,
-    //           bucket: process.env.S3_BUCKET,
-    //           access_key_id: process.env.S3_ACCESS_KEY,
-    //           secret_access_key: process.env.S3_SECRET_KEY,
-    //           file_url: `${process.env.S3_ENDPOINT}/${process.env.S3_BUCKET}`,
-    //           region: process.env.S3_REGION || 'us-east-1', // dummy region as setting the region is optional in MinIO bucket configuration
-    //           additional_client_config: {
-    //             forcePathStyle: true, // This is mandatory for MinIO else the bucket name will be prefixed to the URL
-    //           },
-    //           // other S3 specific configuration...
-    //         },
-    //       },
-    //     ],
-    //   },
-    // },
-    // [Modules.PAYMENT]: {
-    //   resolve: '@medusajs/medusa/payment',
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: './modules/providers/crypto',
-    //         id: 'crypto',
-    //         options: {},
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      resolve: "./modules/company",
+    },
+    {
+      resolve: "./modules/quote",
+    },
   ],
 });

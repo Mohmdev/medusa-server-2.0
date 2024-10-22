@@ -11,3 +11,14 @@ build = "pnpm build"
 [[ports]]
 localPort = 9000
 externalPort = 80
+
+[[ports]]
+localPort = 33943
+externalPort = 3000
+exposeLocalhost = true
+
+[[ports]]
+localPort = 37581
+externalPort = 3001
+exposeLocalhost = true
+
