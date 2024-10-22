@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@medusajs/admin-sdk": "rc",
-    "@medusajs/cli": "rc",
+    "@medusajs/medusa-cli": "rc",
     "@medusajs/framework": "rc",
     "@medusajs/medusa": "rc",
     "@mikro-orm/core": "5.9.7",
