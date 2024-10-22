@@ -18,7 +18,13 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Types */
+    "baseUrl": ".",
+    "paths": {
+      "src/types/*": ["../types/*"]
+    }
   },
   "include": ["."]
 }

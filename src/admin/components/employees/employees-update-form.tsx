@@ -1,17 +1,9 @@
-import {
-  Button,
-  Container,
-  CurrencyInput,
-  Drawer,
-  Label,
-  Table,
-  Text,
-} from "@medusajs/ui";
-import { useState, useEffect } from "react";
-import { EmployeeDTO, CompanyDTO } from "src/modules/company/types/common";
-import { UpdateEmployeeDTO } from "src/modules/company/types/mutations";
-import { currencySymbolMap } from "../../utils";
-import { CoolSwitch } from "../common";
+import { Button, Container, CurrencyInput, Drawer, Label, Table, Text } from '@medusajs/ui';
+import { useState, useEffect } from 'react';
+import { EmployeeDTO, CompanyDTO } from 'src/types/company/common';
+import { UpdateEmployeeDTO } from 'src/types/company/mutations';
+import { currencySymbolMap } from '../../utils';
+import { CoolSwitch } from '../common';
 
 export function EmployeesUpdateForm({
   company,
@@ -30,16 +22,14 @@ export function EmployeesUpdateForm({
     spending_limit: string;
     is_admin: boolean;
   }>({
-    spending_limit: employee?.spending_limit?.toString() || "0",
+    spending_limit: employee?.spending_limit?.toString() || '0',
     is_admin: employee?.is_admin || false,
   });
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const spendingLimit = formData.spending_limit
-      ? Number(formData.spending_limit)
-      : undefined;
+    const spendingLimit = formData.spending_limit ? Number(formData.spending_limit) : undefined;
 
     const data = {
       ...formData,
@@ -71,30 +61,21 @@ export function EmployeesUpdateForm({
               <Table>
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell className="font-medium font-sans txt-compact-small">
-                      Name
-                    </Table.Cell>
+                    <Table.Cell className="font-medium font-sans txt-compact-small">Name</Table.Cell>
                     <Table.Cell>
-                      {employee?.customer!.first_name}{" "}
-                      {employee?.customer!.last_name}
+                      {employee?.customer!.first_name} {employee?.customer!.last_name}
                     </Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className="font-medium font-sans txt-compact-small">
-                      Email
-                    </Table.Cell>
+                    <Table.Cell className="font-medium font-sans txt-compact-small">Email</Table.Cell>
                     <Table.Cell>{employee?.customer!.email}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className="font-medium font-sans txt-compact-small">
-                      Phone
-                    </Table.Cell>
+                    <Table.Cell className="font-medium font-sans txt-compact-small">Phone</Table.Cell>
                     <Table.Cell>{employee?.customer!.phone}</Table.Cell>
                   </Table.Row>
                   <Table.Row>
-                    <Table.Cell className="font-medium font-sans txt-compact-small">
-                      Company
-                    </Table.Cell>
+                    <Table.Cell className="font-medium font-sans txt-compact-small">Company</Table.Cell>
                     <Table.Cell>{company.name}</Table.Cell>
                   </Table.Row>
                 </Table.Body>
@@ -108,14 +89,14 @@ export function EmployeesUpdateForm({
                 Spending Limit
               </Label>
               <CurrencyInput
-                symbol={currencySymbolMap[company.currency_code || "USD"]}
-                code={company.currency_code || "USD"}
+                symbol={currencySymbolMap[company.currency_code || 'USD']}
+                code={company.currency_code || 'USD'}
                 name="spending_limit"
                 value={formData.spending_limit}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    spending_limit: e.target.value.replace(/[^0-9.]/g, ""),
+                    spending_limit: e.target.value.replace(/[^0-9.]/g, ''),
                   })
                 }
                 placeholder="1000"
@@ -130,9 +111,7 @@ export function EmployeesUpdateForm({
                 label="Is Admin"
                 description="Enable to grant admin access"
                 checked={formData.is_admin}
-                onChange={(checked) =>
-                  setFormData({ ...formData, is_admin: checked })
-                }
+                onChange={(checked) => setFormData({ ...formData, is_admin: checked })}
                 tooltip="Admins can manage the company's details and employee permissions."
               />
             </div>
@@ -144,7 +123,7 @@ export function EmployeesUpdateForm({
           <Button variant="secondary">Cancel</Button>
         </Drawer.Close>
         <Button type="submit" disabled={loading}>
-          {loading ? "Saving..." : "Save"}
+          {loading ? 'Saving...' : 'Save'}
         </Button>
         {error && <Text className="text-red-500">{error.message}</Text>}
       </Drawer.Footer>

@@ -1,8 +1,8 @@
-import type { MedusaRequest, MedusaResponse } from "@medusajs/framework";
-import { HttpTypes } from "@medusajs/framework/types";
-import { addToCartWorkflow } from "@medusajs/medusa/core-flows";
-import { ContainerRegistrationKeys } from "@medusajs/utils";
-import { StoreAddLineItemsBulkType } from "../../../validators";
+import type { MedusaRequest, MedusaResponse } from '@medusajs/framework';
+import { HttpTypes } from '@medusajs/framework/types';
+import { addToCartWorkflow } from '@medusajs/medusa/core-flows';
+import { ContainerRegistrationKeys } from '@medusajs/utils';
+import { StoreAddLineItemsBulkType } from '../../../validators';
 
 export async function POST(
   req: MedusaRequest<StoreAddLineItemsBulkType>,
@@ -16,7 +16,7 @@ export async function POST(
     data: [cart],
   } = await query.graph(
     {
-      entity: "cart",
+      entity: 'cart',
       fields: req.remoteQueryConfig.fields,
       filters: { id },
     },
@@ -29,6 +29,7 @@ export async function POST(
   };
 
   await addToCartWorkflow(req.scope).run({
+    // @ts-expect-error
     input: workflowInput,
   });
 
@@ -36,7 +37,7 @@ export async function POST(
     data: [upatedCart],
   } = await query.graph(
     {
-      entity: "cart",
+      entity: 'cart',
       fields: req.remoteQueryConfig.fields,
       filters: { id },
     },

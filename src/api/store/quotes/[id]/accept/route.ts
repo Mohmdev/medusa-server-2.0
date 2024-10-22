@@ -1,11 +1,8 @@
-import type {
-  AuthenticatedMedusaRequest,
-  MedusaResponse,
-} from "@medusajs/framework";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import { AdminQuoteResponse } from "@starter/types";
-import { customerAcceptQuoteWorkflow } from "../../../../../workflows/quote/workflows";
-import { AcceptQuoteType } from "../../validators";
+import type { AuthenticatedMedusaRequest, MedusaResponse } from '@medusajs/framework';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import { customerAcceptQuoteWorkflow } from '../../../../../workflows/quote/workflows';
+import { AcceptQuoteType } from '../../validators';
+import type { AdminQuoteResponse } from 'src/types/quote';
 
 export const POST = async (
   req: AuthenticatedMedusaRequest<AcceptQuoteType>,
@@ -26,7 +23,7 @@ export const POST = async (
     data: [quote],
   } = await query.graph(
     {
-      entity: "quote",
+      entity: 'quote',
       fields: req.remoteQueryConfig.fields,
       filters: { id },
     },

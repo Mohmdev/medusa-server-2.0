@@ -1,8 +1,8 @@
-import { Drawer, toast } from "@medusajs/ui";
-import { CompanyDTO } from "src/modules/company/types/common";
-import { UpdateCompanyDTO } from "src/modules/company/types/mutations";
-import { useUpdateCompany } from "../../hooks";
-import { CompanyForm } from "./company-form";
+import { Drawer, toast } from '@medusajs/ui';
+import { CompanyDTO } from 'src/types/company/common';
+import { UpdateCompanyDTO } from 'src/types/company/mutations';
+import { useUpdateCompany } from '../../hooks';
+import { CompanyForm } from './company-form';
 
 export function CompanyUpdateDrawer({
   company,
@@ -34,12 +34,7 @@ export function CompanyUpdateDrawer({
           <Drawer.Title>Edit Company</Drawer.Title>
         </Drawer.Header>
 
-        <CompanyForm
-          handleSubmit={handleSubmit}
-          loading={loading}
-          error={error}
-          company={currentData}
-        />
+        <CompanyForm handleSubmit={handleSubmit} loading={loading} error={error} company={currentData} />
       </Drawer.Content>
     </Drawer>
   );

@@ -1,10 +1,10 @@
-import { EllipsisHorizontal, PencilSquare, Trash } from "@medusajs/icons";
-import { DropdownMenu, IconButton, toast } from "@medusajs/ui";
-import { useState } from "react";
-import { CompanyDTO, EmployeeDTO } from "src/modules/company/types/common";
-import { EmployeesUpdateDrawer } from ".";
-import { DeletePrompt } from "..";
-import { useDeleteEmployee } from "../../hooks";
+import { EllipsisHorizontal, PencilSquare, Trash } from '@medusajs/icons';
+import { DropdownMenu, IconButton, toast } from '@medusajs/ui';
+import { useState } from 'react';
+import { CompanyDTO, EmployeeDTO } from 'src/types/company/common';
+import { EmployeesUpdateDrawer } from '.';
+import { DeletePrompt } from '..';
+import { useDeleteEmployee } from '../../hooks';
 
 export const EmployeesActionsMenu = ({
   company,
@@ -17,10 +17,7 @@ export const EmployeesActionsMenu = ({
 }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const { mutate: mutateDelete, loading: loadingDelete } = useDeleteEmployee(
-    employee.company_id,
-    employee.id
-  );
+  const { mutate: mutateDelete, loading: loadingDelete } = useDeleteEmployee(employee.company_id, employee.id);
 
   const handleDelete = async () => {
     await mutateDelete();
@@ -37,18 +34,12 @@ export const EmployeesActionsMenu = ({
           </IconButton>
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <DropdownMenu.Item
-            className="gap-x-2"
-            onClick={() => setEditOpen(true)}
-          >
+          <DropdownMenu.Item className="gap-x-2" onClick={() => setEditOpen(true)}>
             <PencilSquare />
             Edit
           </DropdownMenu.Item>
           <DropdownMenu.Separator />
-          <DropdownMenu.Item
-            className="gap-x-2"
-            onClick={() => setDeleteOpen(true)}
-          >
+          <DropdownMenu.Item className="gap-x-2" onClick={() => setDeleteOpen(true)}>
             <Trash />
             Delete
           </DropdownMenu.Item>
@@ -62,12 +53,7 @@ export const EmployeesActionsMenu = ({
         setOpen={setEditOpen}
         toast={toast}
       />
-      <DeletePrompt
-        handleDelete={handleDelete}
-        loading={loadingDelete}
-        open={deleteOpen}
-        setOpen={setDeleteOpen}
-      />
+      <DeletePrompt handleDelete={handleDelete} loading={loadingDelete} open={deleteOpen} setOpen={setDeleteOpen} />
     </>
   );
 };

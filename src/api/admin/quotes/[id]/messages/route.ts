@@ -1,19 +1,14 @@
-import type {
-  AuthenticatedMedusaRequest,
-  MedusaResponse,
-} from "@medusajs/framework";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import { createQuoteMessageWorkflow } from "../../../../../workflows/quote/workflows";
-import { AdminCreateQuoteMessageType } from "../../validators";
+import type { AuthenticatedMedusaRequest, MedusaResponse } from '@medusajs/framework';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import { createQuoteMessageWorkflow } from '../../../../../workflows/quote/workflows';
+import { AdminCreateQuoteMessageType } from '../../validators';
 
-export const POST = async (
-  req: AuthenticatedMedusaRequest<AdminCreateQuoteMessageType>,
-  res: MedusaResponse
-) => {
+export const POST = async (req: AuthenticatedMedusaRequest<AdminCreateQuoteMessageType>, res: MedusaResponse) => {
   const query = req.scope.resolve(ContainerRegistrationKeys.QUERY);
   const { id } = req.params;
 
   await createQuoteMessageWorkflow(req.scope).run({
+    // @ts-expect-error
     input: {
       ...req.validatedBody,
       admin_id: req.auth_context.actor_id,
@@ -25,7 +20,7 @@ export const POST = async (
     data: [quote],
   } = await query.graph(
     {
-      entity: "quote",
+      entity: 'quote',
       fields: req.remoteQueryConfig.fields,
       filters: { id },
     },

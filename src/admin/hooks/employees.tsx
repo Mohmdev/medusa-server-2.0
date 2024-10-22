@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-import {
-  CreateEmployeeDTO,
-  UpdateEmployeeDTO,
-} from "../../modules/company/types/mutations";
-import { EmployeeDTO } from "../../modules/company/types/common";
+import { useEffect, useState } from 'react';
+import { CreateEmployeeDTO, UpdateEmployeeDTO } from '../../types/company/mutations';
+import { EmployeeDTO } from '../../types/company/common';
 
 export const useEmployees = (
   companyId: string,
@@ -27,16 +24,11 @@ export const useEmployees = (
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch(
-          `/admin/companies/${companyId}/employees` +
-            (query ? `?${filterQuery}` : "")
-        );
+        const response = await fetch(`/admin/companies/${companyId}/employees` + (query ? `?${filterQuery}` : ''));
         const result = await response.json();
         setData(result);
       } catch (err) {
-        setError(
-          err instanceof Error ? err : new Error("An unknown error occurred")
-        );
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
         throw err;
       } finally {
         setLoading(false);
@@ -64,23 +56,21 @@ export const useCreateEmployee = (
 
     try {
       const response = await fetch(`/admin/companies/${companyId}/employees`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(employee),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create employee");
+        throw new Error('Failed to create employee');
       }
 
       const result = await response.json();
       return result.employee;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);
@@ -108,27 +98,22 @@ export const useUpdateEmployee = (
     setError(null);
 
     try {
-      const response = await fetch(
-        `/admin/companies/${companyId}/employees/${employeeId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(employee),
-        }
-      );
+      const response = await fetch(`/admin/companies/${companyId}/employees/${employeeId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(employee),
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to update company customer");
+        throw new Error('Failed to update company customer');
       }
 
       const result = await response.json();
       setData(result.employee);
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);
@@ -154,20 +139,15 @@ export const useDeleteEmployee = (
     setError(null);
 
     try {
-      const response = await fetch(
-        `/admin/companies/${companyId}/employees/${employeeId}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/admin/companies/${companyId}/employees/${employeeId}`, {
+        method: 'DELETE',
+      });
 
       if (!response.ok) {
-        throw new Error("Failed to delete company customer");
+        throw new Error('Failed to delete company customer');
       }
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);

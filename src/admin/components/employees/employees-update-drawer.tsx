@@ -1,8 +1,8 @@
-import { Drawer, toast as toastType } from "@medusajs/ui";
-import { EmployeeDTO, CompanyDTO } from "src/modules/company/types/common";
-import { UpdateEmployeeDTO } from "src/modules/company/types/mutations";
-import { useUpdateEmployee } from "../../hooks";
-import { EmployeesUpdateForm } from ".";
+import { Drawer, toast as toastType } from '@medusajs/ui';
+import { EmployeeDTO, CompanyDTO } from 'src/types/company/common';
+import { UpdateEmployeeDTO } from 'src/types/company/mutations';
+import { useUpdateEmployee } from '../../hooks';
+import { EmployeesUpdateForm } from '.';
 
 export function EmployeesUpdateDrawer({
   company,
@@ -19,18 +19,13 @@ export function EmployeesUpdateDrawer({
   setOpen: (open: boolean) => void;
   toast: typeof toastType;
 }) {
-  const { mutate, loading, error } = useUpdateEmployee(
-    employee.company_id,
-    employee.id
-  );
+  const { mutate, loading, error } = useUpdateEmployee(employee.company_id, employee.id);
 
   const handleSubmit = async (formData: UpdateEmployeeDTO) => {
     await mutate(formData).then(() => {
       setOpen(false);
       refetch();
-      toast.success(
-        `Employee ${employee?.customer?.email} updated successfully`
-      );
+      toast.success(`Employee ${employee?.customer?.email} updated successfully`);
     });
   };
 

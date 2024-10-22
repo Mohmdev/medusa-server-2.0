@@ -1,10 +1,6 @@
-import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
-import {
-  IQuoteModuleService,
-  ModuleCreateQuote,
-  ModuleQuote,
-} from "@starter/types";
-import { QUOTE_MODULE } from "../../../modules/quote";
+import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
+import { QUOTE_MODULE } from '../../../modules/quote';
+import type { IQuoteModuleService, ModuleCreateQuote, ModuleQuote } from 'src/types/quote';
 
 /*
   A step to create a quote.
@@ -14,11 +10,8 @@ import { QUOTE_MODULE } from "../../../modules/quote";
   the created quote if the workflow fails.
 */
 export const createQuotesStep = createStep(
-  "create-quotes",
-  async (
-    input: ModuleCreateQuote[],
-    { container }
-  ): Promise<StepResponse<ModuleQuote[], string[]>> => {
+  'create-quotes',
+  async (input: ModuleCreateQuote[], { container }): Promise<StepResponse<ModuleQuote[], string[]>> => {
     const quoteModule = container.resolve<IQuoteModuleService>(QUOTE_MODULE);
 
     const quotes = await quoteModule.createQuotes(input);

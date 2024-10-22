@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";
-import { CompanyDTO } from "../../modules/company/types/common";
-import {
-  CreateCompanyDTO,
-  UpdateCompanyDTO,
-} from "../../modules/company/types/mutations";
+import { useState, useEffect } from 'react';
+import { CompanyDTO } from '../../types/company/common';
+import { CreateCompanyDTO, UpdateCompanyDTO } from '../../types/company/mutations';
 
 export const useCompanies = (
   query?: Record<string, any>
@@ -26,15 +23,11 @@ export const useCompanies = (
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch(
-          "/admin/companies" + (filterQuery ? `?${filterQuery}` : "")
-        );
+        const response = await fetch('/admin/companies' + (filterQuery ? `?${filterQuery}` : ''));
         const result = await response.json();
         setData(result);
       } catch (err) {
-        setError(
-          err instanceof Error ? err : new Error("An unknown error occurred")
-        );
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
         throw err;
       } finally {
         setLoading(false);
@@ -68,16 +61,11 @@ export const useCompany = (
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
-        const response = await fetch(
-          `/admin/companies/${companyId}` +
-            (filterQuery ? `?${filterQuery}` : "")
-        );
+        const response = await fetch(`/admin/companies/${companyId}` + (filterQuery ? `?${filterQuery}` : ''));
         const result = await response.json();
         setData(result);
       } catch (err) {
-        setError(
-          err instanceof Error ? err : new Error("An unknown error occurred")
-        );
+        setError(err instanceof Error ? err : new Error('An unknown error occurred'));
         throw err;
       } finally {
         setLoading(false);
@@ -103,24 +91,22 @@ export const useCreateCompany = (): {
     setError(null);
 
     try {
-      const response = await fetch("/admin/companies", {
-        method: "POST",
+      const response = await fetch('/admin/companies', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(company),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create company");
+        throw new Error('Failed to create company');
       }
 
       const result = await response.json();
       return result;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);
@@ -146,23 +132,21 @@ export const useUpdateCompany = (
 
     try {
       const response = await fetch(`/admin/companies/${companyId}`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(company),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update company");
+        throw new Error('Failed to update company');
       }
 
       const result = await response.json();
       return result;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);
@@ -188,19 +172,17 @@ export const useDeleteCompany = (
 
     try {
       const response = await fetch(`/admin/companies/${companyId}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete company");
+        throw new Error('Failed to delete company');
       }
 
       const result = await response.json();
       return result;
     } catch (err) {
-      setError(
-        err instanceof Error ? err : new Error("An unknown error occurred")
-      );
+      setError(err instanceof Error ? err : new Error('An unknown error occurred'));
       throw err;
     } finally {
       setLoading(false);

@@ -1,11 +1,7 @@
-import { when } from "@medusajs/framework/workflows-sdk";
-import { createWorkflow, WorkflowResponse } from "@medusajs/workflows-sdk";
-import { ModuleCreateEmployee, ModuleEmployee } from "@starter/types";
-import {
-  createEmployeesStep,
-  linkEmployeeToCustomerStep,
-  setAdminRoleStep,
-} from "../steps";
+import { when } from '@medusajs/framework/workflows-sdk';
+import { createWorkflow, WorkflowResponse } from '@medusajs/workflows-sdk';
+import { createEmployeesStep, linkEmployeeToCustomerStep, setAdminRoleStep } from '../steps';
+import type { ModuleCreateEmployee, ModuleEmployee } from 'src/types/company';
 
 type WorkflowInput = {
   employeeData: ModuleCreateEmployee;
@@ -13,7 +9,7 @@ type WorkflowInput = {
 };
 
 export const createEmployeesWorkflow = createWorkflow(
-  "create-employees",
+  'create-employees',
   function (input: WorkflowInput): WorkflowResponse<ModuleEmployee> {
     const employee = createEmployeesStep(input.employeeData);
 

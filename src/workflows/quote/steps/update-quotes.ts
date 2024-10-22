@@ -1,10 +1,7 @@
-import {
-  convertItemResponseToUpdateRequest,
-  getSelectsAndRelationsFromObjectArray,
-} from "@medusajs/framework/utils";
-import { StepResponse, createStep } from "@medusajs/framework/workflows-sdk";
-import { IQuoteModuleService, ModuleUpdateQuote } from "@starter/types";
-import { QUOTE_MODULE } from "../../../modules/quote";
+import { convertItemResponseToUpdateRequest, getSelectsAndRelationsFromObjectArray } from '@medusajs/framework/utils';
+import { StepResponse, createStep } from '@medusajs/framework/workflows-sdk';
+import { QUOTE_MODULE } from '../../../modules/quote';
+import type { IQuoteModuleService, ModuleUpdateQuote } from 'src/types/quote';
 
 /*
   A step to update a quote.
@@ -13,7 +10,7 @@ import { QUOTE_MODULE } from "../../../modules/quote";
   The first function is also in charge of preparing the data to be reverted in the second function.
 */
 export const updateQuotesStep = createStep(
-  "update-quotes",
+  'update-quotes',
   async (data: ModuleUpdateQuote[], { container }) => {
     const quoteModule = container.resolve<IQuoteModuleService>(QUOTE_MODULE);
     const { selects, relations } = getSelectsAndRelationsFromObjectArray(data);
@@ -40,9 +37,7 @@ export const updateQuotesStep = createStep(
     const { dataBeforeUpdate, selects, relations } = revertInput;
 
     await quoteModule.updateQuotes(
-      dataBeforeUpdate.map((data) =>
-        convertItemResponseToUpdateRequest(data, selects, relations)
-      )
+      dataBeforeUpdate.map((data) => convertItemResponseToUpdateRequest(data, selects, relations))
     );
   }
 );

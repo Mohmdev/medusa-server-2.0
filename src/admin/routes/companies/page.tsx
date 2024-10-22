@@ -1,9 +1,9 @@
-import { defineRouteConfig } from "@medusajs/admin-sdk";
-import { BuildingStorefront } from "@medusajs/icons";
-import { Avatar, Container, Heading, Table, Text, Toaster } from "@medusajs/ui";
-import { CompanyDTO } from "../../../modules/company/types/common";
-import { CompanyActionsMenu, CompanyCreateDrawer } from "../../components";
-import { useCompanies } from "../../hooks/companies";
+import { defineRouteConfig } from '@medusajs/admin-sdk';
+import { BuildingStorefront } from '@medusajs/icons';
+import { Avatar, Container, Heading, Table, Text, Toaster } from '@medusajs/ui';
+import { CompanyDTO } from '../../../types/company/common';
+import { CompanyActionsMenu, CompanyCreateDrawer } from '../../components';
+import { useCompanies } from '../../hooks/companies';
 
 const Companies = () => {
   const { data, loading, refetch } = useCompanies();
@@ -34,15 +34,10 @@ const Companies = () => {
                 <Table.Row
                   key={company.id}
                   className="cursor-pointer hover:bg-gray-50"
-                  onClick={() =>
-                    (window.location.href = `/app/companies/${company.id}`)
-                  }
+                  onClick={() => (window.location.href = `/app/companies/${company.id}`)}
                 >
                   <Table.Cell className="w-6 h-6 items-center justify-center">
-                    <Avatar
-                      src={company.logo_url || undefined}
-                      fallback={company.name.charAt(0)}
-                    />
+                    <Avatar src={company.logo_url || undefined} fallback={company.name.charAt(0)} />
                   </Table.Cell>
                   <Table.Cell>{company.name}</Table.Cell>
                   <Table.Cell>{company.phone}</Table.Cell>
@@ -64,7 +59,7 @@ const Companies = () => {
 };
 
 export const config = defineRouteConfig({
-  label: "Companies",
+  label: 'Companies',
   icon: BuildingStorefront,
 });
 

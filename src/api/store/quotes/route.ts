@@ -1,24 +1,19 @@
-import {
-  AuthenticatedMedusaRequest,
-  MedusaResponse,
-} from "@medusajs/framework";
-import { RemoteQueryFunction } from "@medusajs/framework/types";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
-import { AdminQuoteResponse, AdminQuotesResponse } from "@starter/types";
-import { createRequestForQuoteWorkflow } from "../../../workflows/quote/workflows/create-request-for-quote";
-import { CreateQuoteType, GetQuoteParamsType } from "./validators";
+import { AuthenticatedMedusaRequest, MedusaResponse } from '@medusajs/framework';
+import { RemoteQueryFunction } from '@medusajs/framework/types';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import { createRequestForQuoteWorkflow } from '../../../workflows/quote/workflows/create-request-for-quote';
+import { CreateQuoteType, GetQuoteParamsType } from './validators';
+import type { AdminQuoteResponse, AdminQuotesResponse } from 'src/types/quote';
 
 export const GET = async (
   req: AuthenticatedMedusaRequest<GetQuoteParamsType>,
   res: MedusaResponse<AdminQuotesResponse>
 ) => {
-  const query = req.scope.resolve<RemoteQueryFunction>(
-    ContainerRegistrationKeys.QUERY
-  );
+  const query = req.scope.resolve<RemoteQueryFunction>(ContainerRegistrationKeys.QUERY);
 
   const { fields, pagination } = req.remoteQueryConfig;
   const { data: quotes, metadata } = await query.graph({
-    entity: "quote",
+    entity: 'quote',
     fields,
     filters: {
       customer_id: req.auth_context.actor_id,
@@ -41,13 +36,12 @@ export const POST = async (
   req: AuthenticatedMedusaRequest<CreateQuoteType>,
   res: MedusaResponse<AdminQuoteResponse>
 ) => {
-  const query = req.scope.resolve<RemoteQueryFunction>(
-    ContainerRegistrationKeys.QUERY
-  );
+  const query = req.scope.resolve<RemoteQueryFunction>(ContainerRegistrationKeys.QUERY);
 
   const {
     result: { quote: createdQuote },
   } = await createRequestForQuoteWorkflow(req.scope).run({
+    // @ts-expect-error
     input: {
       ...req.validatedBody,
       customer_id: req.auth_context.actor_id,
@@ -58,7 +52,7 @@ export const POST = async (
     data: [quote],
   } = await query.graph(
     {
-      entity: "quote",
+      entity: 'quote',
       fields: req.remoteQueryConfig.fields,
       filters: { id: createdQuote.id },
     },

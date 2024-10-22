@@ -1,18 +1,12 @@
-import { HttpTypes } from "@medusajs/types";
-import { Button, Drawer, toast } from "@medusajs/ui";
-import { AdminCreateEmployee } from "@starter/types";
-import { useState } from "react";
-import { CompanyDTO } from "src/modules/company/types/common";
-import { useAdminCreateCustomer, useCreateEmployee } from "../../hooks";
-import { EmployeesCreateForm } from "./employees-create-form";
+import { HttpTypes } from '@medusajs/types';
+import { Button, Drawer, toast } from '@medusajs/ui';
+import { useState } from 'react';
+import { CompanyDTO } from 'src/types/company/common';
+import { useAdminCreateCustomer, useCreateEmployee } from '../../hooks';
+import { EmployeesCreateForm } from './employees-create-form';
+import type { AdminCreateEmployee } from 'src/types/company';
 
-export function EmployeeCreateDrawer({
-  company,
-  refetch,
-}: {
-  company: CompanyDTO;
-  refetch: () => void;
-}) {
+export function EmployeeCreateDrawer({ company, refetch }: { company: CompanyDTO; refetch: () => void }) {
   const [open, setOpen] = useState(false);
 
   const {
@@ -27,9 +21,7 @@ export function EmployeeCreateDrawer({
     error: createCustomerError,
   } = useAdminCreateCustomer();
 
-  const handleSubmit = async (
-    formData: AdminCreateEmployee & HttpTypes.AdminCreateCustomer
-  ) => {
+  const handleSubmit = async (formData: AdminCreateEmployee & HttpTypes.AdminCreateCustomer) => {
     const customer = await createCustomer({
       email: formData.email!,
       first_name: formData.first_name!,
@@ -39,7 +31,7 @@ export function EmployeeCreateDrawer({
     });
 
     if (!customer) {
-      toast.error("Failed to create customer");
+      toast.error('Failed to create customer');
       return;
     }
 
@@ -50,15 +42,13 @@ export function EmployeeCreateDrawer({
     });
 
     if (!employee) {
-      toast.error("Failed to create employee");
+      toast.error('Failed to create employee');
       return;
     }
 
     refetch();
     setOpen(false);
-    toast.success(
-      `Employee ${employee?.first_name} ${employee?.last_name} created successfully`
-    );
+    toast.success(`Employee ${employee?.first_name} ${employee?.last_name} created successfully`);
   };
 
   const loading = createCustomerLoading || createEmployeeLoading;
@@ -75,12 +65,7 @@ export function EmployeeCreateDrawer({
         <Drawer.Header>
           <Drawer.Title>Add Company Customer</Drawer.Title>
         </Drawer.Header>
-        <EmployeesCreateForm
-          handleSubmit={handleSubmit}
-          loading={loading}
-          error={error}
-          company={company}
-        />
+        <EmployeesCreateForm handleSubmit={handleSubmit} loading={loading} error={error} company={company} />
       </Drawer.Content>
     </Drawer>
   );

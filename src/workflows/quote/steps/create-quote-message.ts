@@ -1,10 +1,6 @@
-import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
-import {
-  IQuoteModuleService,
-  ModuleCreateQuoteMessage,
-  ModuleQuoteMessage,
-} from "@starter/types";
-import { QUOTE_MODULE } from "../../../modules/quote";
+import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
+import { QUOTE_MODULE } from '../../../modules/quote';
+import type { IQuoteModuleService, ModuleCreateQuoteMessage, ModuleQuoteMessage } from 'src/types/quote';
 
 /*
   A step to create a quote's message.
@@ -14,11 +10,8 @@ import { QUOTE_MODULE } from "../../../modules/quote";
   the created message if the workflow fails.
 */
 export const createQuoteMessageStep = createStep(
-  "create-quote-message",
-  async (
-    input: ModuleCreateQuoteMessage,
-    { container }
-  ): Promise<StepResponse<ModuleQuoteMessage, string>> => {
+  'create-quote-message',
+  async (input: ModuleCreateQuoteMessage, { container }): Promise<StepResponse<ModuleQuoteMessage, string>> => {
     const quoteModule = container.resolve<IQuoteModuleService>(QUOTE_MODULE);
 
     const quoteMessage = await quoteModule.createMessages(input);

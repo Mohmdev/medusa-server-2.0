@@ -1,5 +1,5 @@
 import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
-// const { QUOTE_MODULE } = require("./src/modules/quote");
+// const { QUOTE_MODULE } = require('./src/modules/quote');
 
 // const NODE_ENV = process.env.NODE_ENV || 'development';
 // loadEnv(NODE_ENV, process.cwd());
@@ -81,10 +81,12 @@ module.exports = defineConfig({
       },
     },
     {
-      resolve: "./modules/company",
+      // Company
+      resolve: './modules/company',
     },
     {
-      resolve: "./modules/quote",
+      // Quote
+      resolve: require('./src/modules/quote'),
     },
   ],
 });

@@ -1,14 +1,10 @@
-import { EllipsisHorizontal, PencilSquare } from "@medusajs/icons";
-import { DropdownMenu, Heading, IconButton } from "@medusajs/ui";
-import { AdminQuoteResponse } from "@starter/types";
-import { useNavigate } from "react-router-dom";
-import QuoteStatusBadge from "../quote-status-badge";
+import { EllipsisHorizontal, PencilSquare } from '@medusajs/icons';
+import { DropdownMenu, Heading, IconButton } from '@medusajs/ui';
+import { useNavigate } from 'react-router-dom';
+import QuoteStatusBadge from '../quote-status-badge';
+import type { AdminQuoteResponse } from 'src/types/quote';
 
-export const QuoteDetailsHeader = ({
-  quote,
-}: {
-  quote: AdminQuoteResponse["quote"];
-}) => {
+export const QuoteDetailsHeader = ({ quote }: { quote: AdminQuoteResponse['quote'] }) => {
   const navigate = useNavigate();
 
   return (
@@ -30,13 +26,7 @@ export const QuoteDetailsHeader = ({
             <DropdownMenu.Item
               className="gap-x-2"
               onClick={() => navigate(`manage`)}
-              disabled={
-                ![
-                  "pending_merchant",
-                  "customer_rejected",
-                  "merchant_rejected",
-                ].includes(quote.status)
-              }
+              disabled={!['pending_merchant', 'customer_rejected', 'merchant_rejected'].includes(quote.status)}
             >
               <PencilSquare />
               Manage

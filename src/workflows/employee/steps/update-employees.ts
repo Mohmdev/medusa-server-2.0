@@ -1,29 +1,20 @@
-import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
-import {
-  ModuleUpdateEmployee,
-  ModuleEmployee,
-  ICompanyModuleService,
-  QueryEmployee,
-} from "@starter/types";
-import { COMPANY_MODULE } from "../../../modules/company";
-import { ContainerRegistrationKeys } from "@medusajs/framework/utils";
+import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
+import { COMPANY_MODULE } from '../../../modules/company';
+import { ContainerRegistrationKeys } from '@medusajs/framework/utils';
+import type { ICompanyModuleService, ModuleUpdateEmployee, QueryEmployee } from 'src/types/company';
 
 export const updateEmployeesStep = createStep(
-  "update-employees",
-  async (
-    input: ModuleUpdateEmployee,
-    { container }
-  ): Promise<StepResponse<QueryEmployee, QueryEmployee>> => {
-    const companyModuleService =
-      container.resolve<ICompanyModuleService>(COMPANY_MODULE);
+  'update-employees',
+  async (input: ModuleUpdateEmployee, { container }): Promise<StepResponse<QueryEmployee, QueryEmployee>> => {
+    const companyModuleService = container.resolve<ICompanyModuleService>(COMPANY_MODULE);
 
     const query = container.resolve(ContainerRegistrationKeys.QUERY);
 
     const {
       data: [currentData],
     }: { data: QueryEmployee[] } = await query.graph({
-      entity: "employee",
-      fields: ["*"],
+      entity: 'employee',
+      fields: ['*'],
       filters: {
         id: input.id,
       },
@@ -34,8 +25,8 @@ export const updateEmployeesStep = createStep(
     const {
       data: [employee],
     }: { data: QueryEmployee[] } = await query.graph({
-      entity: "employee",
-      fields: ["*", "customer.*", "company.*"],
+      entity: 'employee',
+      fields: ['*', 'customer.*', 'company.*'],
       filters: {
         id: updatedEmployee.id,
       },
@@ -44,11 +35,10 @@ export const updateEmployeesStep = createStep(
     return new StepResponse(employee, currentData);
   },
   async (currentData: ModuleUpdateEmployee, { container }) => {
-    const companyModuleService =
-      container.resolve<ICompanyModuleService>(COMPANY_MODULE);
+    const companyModuleService = container.resolve<ICompanyModuleService>(COMPANY_MODULE);
 
     await companyModuleService.updateEmployees(currentData);
 
-    return new StepResponse("Company customer data restored", currentData);
+    return new StepResponse('Company customer data restored', currentData);
   }
 );

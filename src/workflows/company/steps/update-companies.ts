@@ -1,12 +1,11 @@
-import { createStep, StepResponse } from "@medusajs/framework/workflows-sdk";
-import { ICompanyModuleService, ModuleUpdateCompany } from "@starter/types";
-import { COMPANY_MODULE } from "../../../modules/company";
+import { createStep, StepResponse } from '@medusajs/framework/workflows-sdk';
+import { COMPANY_MODULE } from '../../../modules/company';
+import type { ICompanyModuleService, ModuleUpdateCompany } from 'src/types/company';
 
 export const updateCompaniesStep = createStep(
-  "update-companies",
+  'update-companies',
   async (input: ModuleUpdateCompany, { container }) => {
-    const companyModule =
-      container.resolve<ICompanyModuleService>(COMPANY_MODULE);
+    const companyModule = container.resolve<ICompanyModuleService>(COMPANY_MODULE);
 
     const [previousData] = await companyModule.listCompanies({
       id: input.id,
@@ -17,8 +16,7 @@ export const updateCompaniesStep = createStep(
     return new StepResponse(updatedCompanies, previousData);
   },
   async (previousData: ModuleUpdateCompany, { container }) => {
-    const companyModule =
-      container.resolve<ICompanyModuleService>(COMPANY_MODULE);
+    const companyModule = container.resolve<ICompanyModuleService>(COMPANY_MODULE);
 
     await companyModule.updateCompanies(previousData);
   }
