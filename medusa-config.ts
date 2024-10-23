@@ -1,9 +1,8 @@
-import { loadEnv, defineConfig, Modules } from '@medusajs/framework/utils';
-// const { QUOTE_MODULE } = require('./src/modules/quote');
+import { loadEnv, defineConfig } from '@medusajs/framework/utils';
+const { QUOTE_MODULE } = require('./src/modules/quote');
 
-// const NODE_ENV = process.env.NODE_ENV || 'development';
-// loadEnv(NODE_ENV, process.cwd());
-loadEnv(process.env.NODE_ENV || 'development', process.cwd());
+const NODE_ENV = process.env.NODE_ENV || 'development';
+loadEnv(NODE_ENV, process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
@@ -85,8 +84,7 @@ module.exports = defineConfig({
       resolve: './modules/company',
     },
     {
-      // Quote
-      resolve: require('./src/modules/quote'),
+      resolve: './modules/quote',
     },
   ],
 });

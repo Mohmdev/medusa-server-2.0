@@ -29,7 +29,6 @@ export async function POST(
   };
 
   await addToCartWorkflow(req.scope).run({
-    // @ts-expect-error
     input: workflowInput,
   });
 

@@ -8,7 +8,6 @@ export const POST = async (req: AuthenticatedMedusaRequest<AdminCreateQuoteMessa
   const { id } = req.params;
 
   await createQuoteMessageWorkflow(req.scope).run({
-    // @ts-expect-error
     input: {
       ...req.validatedBody,
       admin_id: req.auth_context.actor_id,

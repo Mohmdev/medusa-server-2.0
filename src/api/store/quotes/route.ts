@@ -41,7 +41,6 @@ export const POST = async (
   const {
     result: { quote: createdQuote },
   } = await createRequestForQuoteWorkflow(req.scope).run({
-    // @ts-expect-error
     input: {
       ...req.validatedBody,
       customer_id: req.auth_context.actor_id,

@@ -1,11 +1,11 @@
 /* Entity: Company */
 
 export enum ModuleCompanySpendingLimitResetFrequency {
-  NEVER = "never",
-  DAILY = "daily",
-  WEEKLY = "weekly",
-  MONTHLY = "monthly",
-  YEARLY = "yearly",
+  NEVER = 'never',
+  DAILY = 'daily',
+  WEEKLY = 'weekly',
+  MONTHLY = 'monthly',
+  YEARLY = 'yearly',
 }
 
 export type ModuleCompany = {
