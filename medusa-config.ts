@@ -12,9 +12,9 @@ module.exports = defineConfig({
     http: {
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
-      storeCors: process.env.STORE_CORS || 'http://localhost:8000',
-      adminCors: process.env.ADMIN_CORS || 'http://localhost:9000',
-      authCors: process.env.AUTH_CORS || 'http://localhost:8000,http://localhost:9000',
+      storeCors: process.env.STORE_CORS! || 'http://localhost:8000',
+      adminCors: process.env.ADMIN_CORS! || 'http://localhost:9000',
+      authCors: process.env.AUTH_CORS! || 'http://localhost:8000,http://localhost:9000',
       // Optional
       compression: {
         enabled: true,
