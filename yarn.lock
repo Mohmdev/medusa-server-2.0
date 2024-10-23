@@ -1982,16 +1982,21 @@
     vite "^5.2.11"
 
 "@medusajs/admin-sdk@rc":
-  version "1.0.0-rc-20241018141633"
-  resolved "https://registry.yarnpkg.com/@medusajs/admin-sdk/-/admin-sdk-1.0.0-rc-20241018141633.tgz#f63994c6908b1fdb3d4f5f39206c162320b6d689"
-  integrity sha512-dju4xMX+3KfisQaHhMKsvTMsLdCrtPLDJcIHp13CCM9lgEByoEqK4UIgmR3+FjFU1ENC6gGOFMtGBVqr06lyxg==
+  version "2.0.0-rc-20241022183311"
+  resolved "https://registry.yarnpkg.com/@medusajs/admin-sdk/-/admin-sdk-2.0.0-rc-20241022183311.tgz#a40bd9d203970f8715c42461f2d2841cf20c1c3d"
+  integrity sha512-tzZdWc1BlfB2Lao9qpOMF6xgLNP0a2VKTY2BS5zQauFYTaosF2D/4+HvEM4g29Ti+Zr6RS+9LqcgqB9eaO8aog==
   dependencies:
-    "@medusajs/admin-shared" "1.0.0-rc-20241018141633"
+    "@medusajs/admin-shared" "2.0.0-rc-20241022183311"
 
 "@medusajs/admin-shared@1.0.0-rc-20241018141633":
   version "1.0.0-rc-20241018141633"
   resolved "https://registry.yarnpkg.com/@medusajs/admin-shared/-/admin-shared-1.0.0-rc-20241018141633.tgz#57734fa6d55adaade8f37cefd9690ff7ec997620"
   integrity sha512-5Gu4gR8jhVl9mzkRo90iWHQahB/yv6HLG13YwflbVMHDkOZGmCXab5gzLnsYWcfg5XMYWt/9ZqezgtV5gvtNCQ==
+
+"@medusajs/admin-shared@2.0.0-rc-20241022183311":
+  version "2.0.0-rc-20241022183311"
+  resolved "https://registry.yarnpkg.com/@medusajs/admin-shared/-/admin-shared-2.0.0-rc-20241022183311.tgz#831012346a73e7ca280d2d4b8419e9d036fc5339"
+  integrity sha512-rNGHN1RRkWm3O7iUZr+5c+J5SDJ6CWFx3D7LlUNarSMEAq3FRjMaAFIer18l+bpK7O01E5qINVESWL+nDSmnPg==
 
 "@medusajs/admin-vite-plugin@1.0.0-rc-20241018141633":
   version "1.0.0-rc-20241018141633"
