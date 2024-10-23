@@ -78,20 +78,5 @@ module.exports = defineConfig({
         ],
       },
     },
-    {
-      resolve: './src/modules/brand',
-    },
-    // [Modules.PAYMENT]: {
-    //   resolve: '@medusajs/medusa/payment',
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: './modules/providers/crypto',
-    //         id: 'crypto',
-    //         options: {},
-    //       },
-    //     ],
-    //   },
-    // },
   ],
 });
