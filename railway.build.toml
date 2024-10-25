@@ -10,7 +10,7 @@ NPM_CONFIG_PRODUCTION = 'true'
 
 
 [phases.setup]
-nixPkgs = ['nodejs_22', 'pnpm-9_x']
+nixPkgs = ['nodejs_22', 'yarn-1_x']
 nixOverlays = [
   'https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz',
 ]
@@ -19,8 +19,11 @@ nixpkgsArchive = 'e05605ec414618eab4a7a6aea8b38f6fbbcc8f08'
 
 [phases.install]
 dependsOn = ['setup']
-cmds = ['pnpm i --frozen-lockfile']
-cacheDirectories = ['/root/.local/share/pnpm/store/v3']
+cmds = [
+  'npm install -g corepack@0.24.1 && corepack enable',
+  'yarn install --check-cache',
+]
+cacheDirectories = ['/usr/local/share/.cache/yarn/v6']
 paths = ['/app/node_modules/.bin']
 
 
