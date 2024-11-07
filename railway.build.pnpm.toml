@@ -4,12 +4,12 @@ buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1727136237'
 [variables]
 CI = 'true'
 NIXPACKS_METADATA = 'node'
-NODE_ENV = 'development'
+NODE_ENV = 'production'
 NPM_CONFIG_PRODUCTION = 'true'
 
 
 [phases.setup]
-nixPkgs = ['nodejs_20', 'pnpm-9_x']
+nixPkgs = ['nodejs_22', 'pnpm-9_x']
 nixOverlays = [
   'https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz',
 ]
@@ -18,16 +18,21 @@ nixpkgsArchive = 'e05605ec414618eab4a7a6aea8b38f6fbbcc8f08'
 
 [phases.install]
 dependsOn = ['setup']
-cmds = ['pnpm i --frozen-lockfile']
+cmd = 'pnpm install --prod --frozen-lockfile'
 cacheDirectories = ['/root/.local/share/pnpm/store/v3']
 paths = ['/app/node_modules/.bin']
 
 
 [phases.build]
 dependsOn = ['install']
-cmds = ['medusa build']
+cmds = [
+  'medusa build',
+  'cd .medusa/server',
+  'pnpm install --prod',
+  'medusa db:migrate',
+]
 cacheDirectories = ['node_modules/.cache']
 
 
 [start]
-cmd = 'medusa db:migrate && medusa start -p 9000'
+cmd = 'cd .medusa/server && medusa start -p 9000'
