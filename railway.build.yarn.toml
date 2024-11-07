@@ -1,6 +1,7 @@
 providers = ['node']
 buildImage = 'ghcr.io/railwayapp/nixpacks:ubuntu-1727136237'
 
+
 [variables]
 CI = 'true'
 NIXPACKS_METADATA = 'node'
@@ -18,7 +19,10 @@ nixpkgsArchive = 'e05605ec414618eab4a7a6aea8b38f6fbbcc8f08'
 
 [phases.install]
 dependsOn = ['setup']
-cmds = ['yarn install --frozen-lockfile']
+cmds = [
+  'npm install -g corepack@0.24.1 && corepack enable',
+  'yarn install --check-cache',
+]
 cacheDirectories = ['/usr/local/share/.cache/yarn/v6']
 paths = ['/app/node_modules/.bin']
 

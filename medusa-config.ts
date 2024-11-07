@@ -12,9 +12,9 @@ module.exports = defineConfig({
     http: {
       jwtSecret: process.env.JWT_SECRET || 'supersecret',
       cookieSecret: process.env.COOKIE_SECRET || 'supersecret',
-      storeCors: process.env.STORE_CORS || 'http://localhost:8000',
-      adminCors: process.env.ADMIN_CORS || 'http://localhost:9000',
-      authCors: process.env.AUTH_CORS || 'http://localhost:8000,http://localhost:9000',
+      storeCors: (process.env.STORE_CORS as string) || 'http://localhost:8000',
+      adminCors: (process.env.ADMIN_CORS as string) || 'http://localhost:9000',
+      authCors: (process.env.AUTH_CORS as string) || 'http://localhost:8000,http://localhost:9000',
       // Optional
       compression: {
         enabled: true,
@@ -26,8 +26,8 @@ module.exports = defineConfig({
   },
   admin: {
     path: '/dashboard',
-    backendUrl: process.env.MEDUSA_BACKEND_URL || 'http://localhost:9000',
-    storefrontUrl: process.env.STORE_CORS || 'http://localhost:8000',
+    backendUrl: (process.env.MEDUSA_BACKEND_URL as string) || 'http://localhost:9000',
+    storefrontUrl: (process.env.STORE_CORS as string) || 'http://localhost:8000',
     //
     // Optional: if set to `true`, the admin frontend will not be built.
     // Use this where you are not serving the admin (e.g. workerMode: 'worker' and or 'server')
@@ -78,20 +78,5 @@ module.exports = defineConfig({
         ],
       },
     },
-    {
-      resolve: './src/modules/brand',
-    },
-    // [Modules.PAYMENT]: {
-    //   resolve: '@medusajs/medusa/payment',
-    //   options: {
-    //     providers: [
-    //       {
-    //         resolve: './modules/providers/crypto',
-    //         id: 'crypto',
-    //         options: {},
-    //       },
-    //     ],
-    //   },
-    // },
   ],
 });
