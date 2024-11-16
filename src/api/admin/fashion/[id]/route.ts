@@ -1,14 +1,14 @@
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import { z } from 'zod';
-import FashionModuleService from '../../../../modules/fashion/service';
-import { FASHION_MODULE } from '../../../../modules/fashion';
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import { z } from "zod";
+import FashionModuleService from "../../../../modules/fashion/service";
+import { FASHION_MODULE } from "../../../../modules/fashion";
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   const fashionModuleService: FashionModuleService =
     req.scope.resolve(FASHION_MODULE);
 
   const material = await fashionModuleService.retrieveMaterial(req.params.id, {
-    relations: ['colors'],
+    relations: ["colors"],
     withDeleted: true,
   });
 
@@ -38,7 +38,7 @@ export const DELETE = async (req: MedusaRequest, res: MedusaResponse) => {
   await fashionModuleService.softDeleteMaterials(req.params.id);
 
   const material = await fashionModuleService.retrieveMaterial(req.params.id, {
-    relations: ['colors'],
+    relations: ["colors"],
     withDeleted: true,
   });
 

@@ -2,8 +2,8 @@ import {
   createSelectParams,
   createFindParams,
   createOperatorMap,
-} from '@medusajs/medusa/api/utils/validators';
-import { z } from 'zod';
+} from "@medusajs/medusa/api/utils/validators";
+import { z } from "zod";
 
 export type AdminGetProductTypeParamsType = z.infer<
   typeof AdminGetProductTypeParams

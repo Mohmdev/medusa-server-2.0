@@ -1,15 +1,15 @@
-import { Label, Button, clx } from '@medusajs/ui';
-import { DropzoneProps, useDropzone } from 'react-dropzone';
-import { useController, useFormContext } from 'react-hook-form';
-import { z } from 'zod';
+import { Label, Button, clx } from "@medusajs/ui";
+import { DropzoneProps, useDropzone } from "react-dropzone";
+import { useController, useFormContext } from "react-hook-form";
+import { z } from "zod";
 
-import { useAdminUploadImage } from '../../hooks/images';
+import { useAdminUploadImage } from "../../hooks/images";
 
 export interface ImageFieldProps {
   className?: string;
   name: string;
   label?: string;
-  dropzoneProps?: Omit<DropzoneProps, 'maxFiles'>;
+  dropzoneProps?: Omit<DropzoneProps, "maxFiles">;
   dropzoneRootClassName?: string;
   sizeRecommendation?: React.ReactNode;
   isRequired?: boolean;
@@ -35,7 +35,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({
   label,
   dropzoneProps,
   dropzoneRootClassName,
-  sizeRecommendation = '1200 x 1600 (3:4) recommended, up to 10MB each',
+  sizeRecommendation = "1200 x 1600 (3:4) recommended, up to 10MB each",
   isRequired,
 }) => {
   const form = useFormContext();
@@ -44,7 +44,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({
       id: string;
       url: string;
     };
-  }>({ name: name as '__name__' });
+  }>({ name: name as "__name__" });
   const uploadFileMutation = useAdminUploadImage({
     onSuccess: (data) => {
       field.onChange({
@@ -55,14 +55,14 @@ export const ImageField: React.FC<ImageFieldProps> = ({
     onError(error) {
       form.setError(name, {
         message: error.message,
-        type: 'upload_error',
+        type: "upload_error",
       });
     },
   });
 
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: {
-      'image/*': ['.jpg', '.jpeg', '.png'],
+      "image/*": [".jpg", ".jpeg", ".png"],
     },
     ...dropzoneProps,
     maxFiles: 1,
@@ -75,22 +75,22 @@ export const ImageField: React.FC<ImageFieldProps> = ({
 
   return (
     <div className={className}>
-      {typeof label !== 'undefined' && (
+      {typeof label !== "undefined" && (
         <Label htmlFor={name} className="block mb-1">
           {label}
-          {isRequired ? <span className="text-red-500">*</span> : ''}
+          {isRequired ? <span className="text-red-500">*</span> : ""}
         </Label>
       )}
       <div
         {...getRootProps({
           className: clx(
-            'inter-base-regular text-grey-50 rounded-rounded border-grey-20 hover:border-violet-60 hover:text-grey-40 flex h-full w-full cursor-pointer select-none flex-col items-center justify-center border-2 border-dashed transition-colors',
+            "inter-base-regular text-grey-50 rounded-rounded border-grey-20 hover:border-violet-60 hover:text-grey-40 flex h-full w-full cursor-pointer select-none flex-col items-center justify-center border-2 border-dashed transition-colors",
             dropzoneRootClassName,
           ),
         })}
       >
         <input {...getInputProps()} id={name} />
-        {field.value && typeof field.value !== 'string' ? (
+        {field.value && typeof field.value !== "string" ? (
           <img
             src={field.value.url}
             className="w-full h-full object-contain rounded-rounded"
@@ -99,7 +99,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({
           <div className="flex flex-col items-center justify-center">
             <p>
               <span>
-                Drop your image here, or{' '}
+                Drop your image here, or{" "}
                 <span className="text-violet-60">click to browse</span>
               </span>
             </p>
@@ -107,7 +107,7 @@ export const ImageField: React.FC<ImageFieldProps> = ({
           </div>
         )}
       </div>
-      {field.value && typeof field.value !== 'string' && (
+      {field.value && typeof field.value !== "string" && (
         <div className="mt-2 flex flex-row items-center justify-center gap-2">
           <Button
             type="button"

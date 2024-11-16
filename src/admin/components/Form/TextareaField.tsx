@@ -1,5 +1,5 @@
-import { Textarea, Label, clx } from '@medusajs/ui';
-import { useController, ControllerRenderProps } from 'react-hook-form';
+import { Textarea, Label, clx } from "@medusajs/ui";
+import { useController, ControllerRenderProps } from "react-hook-form";
 
 export interface TextareaFieldProps {
   className?: string;
@@ -8,7 +8,7 @@ export interface TextareaFieldProps {
   labelProps?: React.ComponentProps<typeof Label>;
   textareaProps?: Omit<
     React.ComponentProps<typeof Textarea>,
-    'name' | 'id' | 'type' | keyof ControllerRenderProps
+    "name" | "id" | "type" | keyof ControllerRenderProps
   >;
   isRequired?: boolean;
 }
@@ -21,26 +21,26 @@ export const TextareaField: React.FC<TextareaFieldProps> = ({
   textareaProps,
   isRequired,
 }) => {
-  const { field, fieldState } = useController<{ __name__: string }, '__name__'>(
-    { name: name as '__name__' }
+  const { field, fieldState } = useController<{ __name__: string }, "__name__">(
+    { name: name as "__name__" },
   );
 
   return (
     <div className={className}>
-      {typeof label !== 'undefined' && (
+      {typeof label !== "undefined" && (
         <Label
           {...labelProps}
           htmlFor={name}
-          className={clx('block mb-1', labelProps?.className)}
+          className={clx("block mb-1", labelProps?.className)}
         >
           {label}
-          {isRequired ? <span className="text-red-500">*</span> : ''}
+          {isRequired ? <span className="text-red-500">*</span> : ""}
         </Label>
       )}
       <Textarea
         {...textareaProps}
         {...field}
-        value={field.value ?? ''}
+        value={field.value ?? ""}
         id={name}
         aria-invalid={Boolean(fieldState.error)}
       />

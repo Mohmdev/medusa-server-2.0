@@ -1,8 +1,8 @@
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import { Modules } from '@medusajs/framework/utils';
-import { IProductModuleService } from '@medusajs/framework/types';
-import { FASHION_MODULE } from '../../../../../modules/fashion';
-import FashionModuleService from '../../../../../modules/fashion/service';
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import { Modules } from "@medusajs/framework/utils";
+import { IProductModuleService } from "@medusajs/framework/types";
+import { FASHION_MODULE } from "../../../../../modules/fashion";
+import FashionModuleService from "../../../../../modules/fashion/service";
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   const productModuleService: IProductModuleService = req.scope.resolve(
@@ -16,16 +16,16 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
       handle: req.params.productHandle,
     },
     {
-      relations: ['options', 'variants', 'variants.options'],
+      relations: ["options", "variants", "variants.options"],
       take: 1,
     },
   );
 
   const materialOption = product.options.find(
-    (option) => option.title === 'Material',
+    (option) => option.title === "Material",
   );
   const colorOption = product.options.find(
-    (option) => option.title === 'Color',
+    (option) => option.title === "Color",
   );
 
   if (!materialOption || !colorOption) {
@@ -67,7 +67,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
       name: Array.from(materialsAndColorsNamesTree.keys()),
     },
     {
-      relations: ['colors'],
+      relations: ["colors"],
     },
   );
 

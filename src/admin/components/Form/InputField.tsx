@@ -1,15 +1,15 @@
-import { Input, Label, clx } from '@medusajs/ui';
-import { useController, ControllerRenderProps } from 'react-hook-form';
+import { Input, Label, clx } from "@medusajs/ui";
+import { useController, ControllerRenderProps } from "react-hook-form";
 
 export interface InputFieldProps {
   className?: string;
   name: string;
   label?: string;
-  type?: React.ComponentProps<typeof Input>['type'];
+  type?: React.ComponentProps<typeof Input>["type"];
   labelProps?: React.ComponentProps<typeof Label>;
   inputProps?: Omit<
     React.ComponentProps<typeof Input>,
-    'name' | 'id' | 'type' | keyof ControllerRenderProps
+    "name" | "id" | "type" | keyof ControllerRenderProps
   >;
   isRequired?: boolean;
   suffix?: React.ReactNode;
@@ -25,24 +25,24 @@ export const InputField: React.FC<InputFieldProps> = ({
   isRequired,
   suffix,
 }) => {
-  const { field, fieldState } = useController<{ __name__: string }, '__name__'>(
-    { name: name as '__name__' },
+  const { field, fieldState } = useController<{ __name__: string }, "__name__">(
+    { name: name as "__name__" },
   );
 
   const inputEl = (
     <Input
       {...inputProps}
       {...field}
-      value={field.value ?? ''}
+      value={field.value ?? ""}
       id={name}
       type={type}
       aria-invalid={Boolean(fieldState.error)}
       className={clx(
         {
-          'pr-8':
+          "pr-8":
             Boolean(suffix) &&
-            (inputProps?.size === 'base' || !inputProps?.size),
-          'pr-7': Boolean(suffix) && inputProps?.size === 'small',
+            (inputProps?.size === "base" || !inputProps?.size),
+          "pr-7": Boolean(suffix) && inputProps?.size === "small",
         },
         inputProps?.className,
       )}
@@ -51,14 +51,14 @@ export const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className={className}>
-      {typeof label !== 'undefined' && (
+      {typeof label !== "undefined" && (
         <Label
           {...labelProps}
           htmlFor={name}
-          className={clx('block mb-1', labelProps?.className)}
+          className={clx("block mb-1", labelProps?.className)}
         >
           {label}
-          {isRequired ? <span className="text-red-500">*</span> : ''}
+          {isRequired ? <span className="text-red-500">*</span> : ""}
         </Label>
       )}
       {suffix ? (
@@ -66,10 +66,10 @@ export const InputField: React.FC<InputFieldProps> = ({
           {inputEl}
           <div
             className={clx(
-              'absolute bottom-0 right-0 flex items-center justify-center border-l',
+              "absolute bottom-0 right-0 flex items-center justify-center border-l",
               {
-                'h-8 w-8': inputProps?.size === 'base' || !inputProps?.size,
-                'h-7 w-7': inputProps?.size === 'small',
+                "h-8 w-8": inputProps?.size === "base" || !inputProps?.size,
+                "h-7 w-7": inputProps?.size === "small",
               },
             )}
           >

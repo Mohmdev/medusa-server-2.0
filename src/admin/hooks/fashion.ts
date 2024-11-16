@@ -2,7 +2,7 @@ import {
   useMutation,
   UseMutationOptions,
   useQueryClient,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
 export const useCreateMaterialMutation = (
   options:
@@ -15,25 +15,25 @@ export const useCreateMaterialMutation = (
           },
           unknown
         >,
-        'mutationKey' | 'mutationFn'
+        "mutationKey" | "mutationFn"
       >
     | undefined = undefined,
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['fashion', 'create'],
+    mutationKey: ["fashion", "create"],
     mutationFn: async (values: { name: string }) => {
-      return fetch('/admin/fashion', {
-        method: 'POST',
+      return fetch("/admin/fashion", {
+        method: "POST",
         body: JSON.stringify(values),
-        credentials: 'include',
+        credentials: "include",
       }).then((res) => res.json());
     },
     ...options,
     onSuccess: async (...args) => {
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'fashion',
+        predicate: (query) => query.queryKey[0] === "fashion",
       });
 
       if (options?.onSuccess) {
@@ -53,25 +53,25 @@ export const useCreateColorMutation = (
           { name: string; hex_code: string },
           unknown
         >,
-        'mutationKey' | 'mutationFn'
+        "mutationKey" | "mutationFn"
       >
     | undefined = undefined,
 ) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ['fashion', material_id, 'colors', 'create'],
+    mutationKey: ["fashion", material_id, "colors", "create"],
     mutationFn: async (values: { name: string; hex_code: string }) => {
       return fetch(`/admin/fashion/${material_id}/colors`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(values),
-        credentials: 'include',
+        credentials: "include",
       }).then((res) => res.json());
     },
     ...options,
     onSuccess: async (...args) => {
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'fashion',
+        predicate: (query) => query.queryKey[0] === "fashion",
       });
 
       if (options?.onSuccess) {

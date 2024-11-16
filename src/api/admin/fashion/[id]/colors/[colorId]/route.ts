@@ -1,7 +1,7 @@
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import { z } from 'zod';
-import FashionModuleService from '../../../../../../modules/fashion/service';
-import { FASHION_MODULE } from '../../../../../../modules/fashion';
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import { z } from "zod";
+import FashionModuleService from "../../../../../../modules/fashion/service";
+import { FASHION_MODULE } from "../../../../../../modules/fashion";
 
 export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
   const fashionModuleService: FashionModuleService =

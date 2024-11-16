@@ -1,13 +1,13 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   FormProvider,
   useForm,
   UseFormProps,
   DefaultValues,
   UseFormReturn,
-} from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+} from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type FormProps<T extends z.ZodType<any, any>> = UseFormProps<
   z.infer<T>
@@ -19,7 +19,7 @@ export type FormProps<T extends z.ZodType<any, any>> = UseFormProps<
   ) => void | Promise<void>;
   defaultValues?: DefaultValues<z.infer<T>>;
   children?: React.ReactNode;
-  formProps?: Omit<React.ComponentProps<'form'>, 'onSubmit'>;
+  formProps?: Omit<React.ComponentProps<"form">, "onSubmit">;
 };
 
 export const Form = <T extends z.ZodType<any, any>>({

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { defineWidgetConfig } from '@medusajs/admin-sdk';
-import { DetailWidgetProps, AdminCollection } from '@medusajs/framework/types';
-import { Container, Heading, Button, Drawer, Text } from '@medusajs/ui';
-import { PencilSquare } from '@medusajs/icons';
-import { z } from 'zod';
-import { ImageField, imageFieldSchema } from '../components/Form/ImageField';
-import { Form } from '../components/Form/Form';
+import * as React from "react";
+import { defineWidgetConfig } from "@medusajs/admin-sdk";
+import { DetailWidgetProps, AdminCollection } from "@medusajs/framework/types";
+import { Container, Heading, Button, Drawer, Text } from "@medusajs/ui";
+import { PencilSquare } from "@medusajs/icons";
+import { z } from "zod";
+import { ImageField, imageFieldSchema } from "../components/Form/ImageField";
+import { Form } from "../components/Form/Form";
 
 const detailsFormSchema = z.object({
   image: imageFieldSchema().optional(),
@@ -32,9 +32,9 @@ const UpdateDetailsDrawer: React.FC<{
             schema={detailsFormSchema}
             onSubmit={async (values) => {
               await fetch(`/admin/custom/product-types/${id}/details`, {
-                method: 'POST',
+                method: "POST",
                 body: JSON.stringify(values),
-                credentials: 'include',
+                credentials: "include",
               });
 
               onSave(values);
@@ -76,7 +76,7 @@ const ProductTypeDetailsWidget = ({
 
   React.useEffect(() => {
     fetch(`/admin/custom/product-types/${data.id}/details`, {
-      credentials: 'include',
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((json) => {
@@ -122,7 +122,7 @@ const ProductTypeDetailsWidget = ({
           <Text>Loading...</Text>
         ) : (
           <div className="flex flex-col gap-2">
-            {typeof details.image?.url === 'string' ? (
+            {typeof details.image?.url === "string" ? (
               <div>
                 <img
                   src={details.image.url}
@@ -140,7 +140,7 @@ const ProductTypeDetailsWidget = ({
 };
 
 export const config = defineWidgetConfig({
-  zone: 'product_type.details.after',
+  zone: "product_type.details.after",
 });
 
 export default ProductTypeDetailsWidget;

@@ -1,6 +1,6 @@
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import FashionModuleService from '../../../../../modules/fashion/service';
-import { FASHION_MODULE } from '../../../../../modules/fashion';
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import FashionModuleService from "../../../../../modules/fashion/service";
+import { FASHION_MODULE } from "../../../../../modules/fashion";
 
 export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   const fashionModuleService: FashionModuleService =
@@ -9,7 +9,7 @@ export const POST = async (req: MedusaRequest, res: MedusaResponse) => {
   await fashionModuleService.restoreMaterials(req.params.id);
 
   const material = await fashionModuleService.retrieveMaterial(req.params.id, {
-    relations: ['colors'],
+    relations: ["colors"],
     withDeleted: true,
   });
 

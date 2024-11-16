@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { defineWidgetConfig } from '@medusajs/admin-sdk';
-import { DetailWidgetProps, AdminCollection } from '@medusajs/framework/types';
-import { Container, Heading, Button, Drawer, Text } from '@medusajs/ui';
-import { PencilSquare } from '@medusajs/icons';
-import { z } from 'zod';
-import { ImageField, imageFieldSchema } from '../components/Form/ImageField';
-import { Form } from '../components/Form/Form';
-import { TextareaField } from '../components/Form/TextareaField';
-import { InputField } from '../components/Form/InputField';
+import * as React from "react";
+import { defineWidgetConfig } from "@medusajs/admin-sdk";
+import { DetailWidgetProps, AdminCollection } from "@medusajs/framework/types";
+import { Container, Heading, Button, Drawer, Text } from "@medusajs/ui";
+import { PencilSquare } from "@medusajs/icons";
+import { z } from "zod";
+import { ImageField, imageFieldSchema } from "../components/Form/ImageField";
+import { Form } from "../components/Form/Form";
+import { TextareaField } from "../components/Form/TextareaField";
+import { InputField } from "../components/Form/InputField";
 
 const detailsFormSchema = z.object({
   image: imageFieldSchema().optional(),
@@ -44,9 +44,9 @@ const UpdateDetailsDrawer: React.FC<{
             schema={detailsFormSchema}
             onSubmit={async (values) => {
               await fetch(`/admin/custom/collections/${id}/details`, {
-                method: 'POST',
+                method: "POST",
                 body: JSON.stringify(values),
-                credentials: 'include',
+                credentials: "include",
               });
 
               onSave(values);
@@ -129,7 +129,7 @@ const CollectionDetailsWidget = ({
 
   React.useEffect(() => {
     fetch(`/admin/custom/collections/${data.id}/details`, {
-      credentials: 'include',
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((json) => {
@@ -175,7 +175,7 @@ const CollectionDetailsWidget = ({
           <Text>Loading...</Text>
         ) : (
           <div className="flex flex-col gap-2">
-            {typeof details.image?.url === 'string' && (
+            {typeof details.image?.url === "string" && (
               <div>
                 <img
                   src={details.image.url}
@@ -187,13 +187,13 @@ const CollectionDetailsWidget = ({
               <Text>{details.description}</Text>
             )}
 
-            {typeof details.image?.url !== 'string' && !details.description && (
+            {typeof details.image?.url !== "string" && !details.description && (
               <Text>No details available</Text>
             )}
 
             <Heading>Collection Page</Heading>
 
-            {typeof details.collection_page_image?.url === 'string' && (
+            {typeof details.collection_page_image?.url === "string" && (
               <div>
                 <img
                   src={details.collection_page_image.url}
@@ -208,7 +208,7 @@ const CollectionDetailsWidget = ({
               <Text>{details.collection_page_content}</Text>
             )}
 
-            {typeof details.collection_page_image?.url !== 'string' &&
+            {typeof details.collection_page_image?.url !== "string" &&
               !details.collection_page_heading &&
               !details.collection_page_content && (
                 <Text>Collection page details not entered</Text>
@@ -216,11 +216,11 @@ const CollectionDetailsWidget = ({
 
             <Heading>Product Page</Heading>
 
-            {typeof details.product_page_heading?.length === 'string' && (
+            {typeof details.product_page_heading?.length === "string" && (
               <Text>{details.product_page_heading}</Text>
             )}
 
-            {typeof details.product_page_image?.url === 'string' && (
+            {typeof details.product_page_image?.url === "string" && (
               <div>
                 <img
                   src={details.product_page_image.url}
@@ -229,7 +229,7 @@ const CollectionDetailsWidget = ({
               </div>
             )}
 
-            {typeof details.product_page_wide_image?.url === 'string' && (
+            {typeof details.product_page_wide_image?.url === "string" && (
               <div>
                 <img
                   src={details.product_page_wide_image.url}
@@ -238,7 +238,7 @@ const CollectionDetailsWidget = ({
               </div>
             )}
 
-            {typeof details.product_page_cta_image?.url === 'string' && (
+            {typeof details.product_page_cta_image?.url === "string" && (
               <div>
                 <img
                   src={details.product_page_cta_image.url}
@@ -255,10 +255,10 @@ const CollectionDetailsWidget = ({
               <Text>{details.product_page_cta_link}</Text>
             )}
 
-            {typeof details.product_page_heading?.length !== 'string' &&
-              typeof details.product_page_image?.url !== 'string' &&
-              typeof details.product_page_wide_image?.url !== 'string' &&
-              typeof details.product_page_cta_image?.url !== 'string' &&
+            {typeof details.product_page_heading?.length !== "string" &&
+              typeof details.product_page_image?.url !== "string" &&
+              typeof details.product_page_wide_image?.url !== "string" &&
+              typeof details.product_page_cta_image?.url !== "string" &&
               !details.product_page_cta_heading &&
               !details.product_page_cta_link && (
                 <Text>Product page details not entered</Text>
@@ -271,7 +271,7 @@ const CollectionDetailsWidget = ({
 };
 
 export const config = defineWidgetConfig({
-  zone: 'product_collection.details.after',
+  zone: "product_collection.details.after",
 });
 
 export default CollectionDetailsWidget;

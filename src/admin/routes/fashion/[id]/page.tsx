@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { z } from 'zod';
-import { useParams } from 'react-router-dom';
+import * as React from "react";
+import { z } from "zod";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Heading,
@@ -14,21 +14,21 @@ import {
   Switch,
   Label,
   Kbd,
-} from '@medusajs/ui';
+} from "@medusajs/ui";
 import {
   PencilSquare,
   EllipsisHorizontal,
   Trash,
   ArrowPath,
-} from '@medusajs/icons';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useSearchParams } from 'react-router-dom';
-import type { MaterialModelType } from '../../../../modules/fashion/models/material';
-import { Form } from '../../../components/Form/Form';
-import { InputField } from '../../../components/Form/InputField';
-import { EditMaterialDrawer } from '../../../components/EditMaterialDrawer';
-import { ColorModelType } from '../../../../modules/fashion/models/color';
-import { useCreateColorMutation } from '../../../hooks/fashion';
+} from "@medusajs/icons";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
+import type { MaterialModelType } from "../../../../modules/fashion/models/material";
+import { Form } from "../../../components/Form/Form";
+import { InputField } from "../../../components/Form/InputField";
+import { EditMaterialDrawer } from "../../../components/EditMaterialDrawer";
+import { ColorModelType } from "../../../../modules/fashion/models/color";
+import { useCreateColorMutation } from "../../../hooks/fashion";
 
 const colorFormSchema = z.object({
   name: z.string().min(1),
@@ -44,17 +44,17 @@ const EditColorDrawer: React.FC<{
   const queryClient = useQueryClient();
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   const updateColorMutation = useMutation({
-    mutationKey: ['fashion', materialId, 'colors', id, 'update'],
+    mutationKey: ["fashion", materialId, "colors", id, "update"],
     mutationFn: async (values: z.infer<typeof colorFormSchema>) => {
       return fetch(`/admin/fashion/${materialId}/colors/${id}`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify(values),
-        credentials: 'include',
+        credentials: "include",
       }).then((res) => res.json());
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'fashion',
+        predicate: (query) => query.queryKey[0] === "fashion",
       });
     },
   });
@@ -85,7 +85,7 @@ const EditColorDrawer: React.FC<{
                 label="Hex Code"
                 type="color"
                 inputProps={{
-                  className: 'max-w-8',
+                  className: "max-w-8",
                 }}
               />
             </div>
@@ -117,16 +117,16 @@ const DeleteColorPrompt: React.FC<{
   const queryClient = useQueryClient();
   const [isPromptOpen, setIsPromptOpen] = React.useState(false);
   const deleteColorMutation = useMutation({
-    mutationKey: ['fashion', materialId, 'colors', id, 'delete'],
+    mutationKey: ["fashion", materialId, "colors", id, "delete"],
     mutationFn: async () => {
       return fetch(`/admin/fashion/${materialId}/colors/${id}`, {
-        method: 'DELETE',
-        credentials: 'include',
+        method: "DELETE",
+        credentials: "include",
       }).then((res) => res.json());
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'fashion',
+        predicate: (query) => query.queryKey[0] === "fashion",
       });
 
       setIsPromptOpen(false);
@@ -167,16 +167,16 @@ const RestoreColorPrompt: React.FC<{
   const queryClient = useQueryClient();
   const [isPromptOpen, setIsPromptOpen] = React.useState(false);
   const restoreColorMutation = useMutation({
-    mutationKey: ['fashion', materialId, 'colors', id, 'restore'],
+    mutationKey: ["fashion", materialId, "colors", id, "restore"],
     mutationFn: async () => {
       return fetch(`/admin/fashion/${materialId}/colors/${id}/restore`, {
-        method: 'POST',
-        credentials: 'include',
+        method: "POST",
+        credentials: "include",
       }).then((res) => res.json());
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'fashion',
+        predicate: (query) => query.queryKey[0] === "fashion",
       });
 
       setIsPromptOpen(false);
@@ -214,30 +214,30 @@ const RestoreColorPrompt: React.FC<{
 
 const MaterialColors: React.FC<{ materialId: string }> = ({ materialId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const page = Number(searchParams.get('page')) || 1;
+  const page = Number(searchParams.get("page")) || 1;
   const setPage = React.useCallback(
     (page: number) => {
       setSearchParams((prev) => {
         const next = new URLSearchParams(prev);
-        next.set('page', page.toString());
+        next.set("page", page.toString());
         return next;
       });
     },
     [setSearchParams],
   );
-  const deleted = searchParams.has('deleted');
+  const deleted = searchParams.has("deleted");
   const toggleDeleted = React.useCallback(() => {
     setSearchParams((prev) => {
       const next = new URLSearchParams(prev);
 
-      if (prev.has('page')) {
-        next.delete('page');
+      if (prev.has("page")) {
+        next.delete("page");
       }
 
-      if (!prev.has('deleted')) {
-        next.set('deleted', '');
+      if (!prev.has("deleted")) {
+        next.set("deleted", "");
       } else {
-        next.delete('deleted');
+        next.delete("deleted");
       }
 
       return next;
@@ -247,14 +247,14 @@ const MaterialColors: React.FC<{ materialId: string }> = ({ materialId }) => {
   const [isCreateModalOpen, setIsCreateModalOpen] = React.useState(false);
 
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['fashion', materialId, 'colors', deleted, page],
+    queryKey: ["fashion", materialId, "colors", deleted, page],
     queryFn: async () => {
       return fetch(
         `/admin/fashion/${materialId}/colors?page=${page}${
-          deleted ? '&deleted=true' : ''
+          deleted ? "&deleted=true" : ""
         }`,
         {
-          credentials: 'include',
+          credentials: "include",
         },
       ).then(
         (res) =>
@@ -303,7 +303,7 @@ const MaterialColors: React.FC<{ materialId: string }> = ({ materialId }) => {
                     setIsCreateModalOpen(false);
                   }}
                   formProps={{
-                    id: 'create-color-form',
+                    id: "create-color-form",
                   }}
                 >
                   <div className="flex flex-col gap-4">
@@ -313,7 +313,7 @@ const MaterialColors: React.FC<{ materialId: string }> = ({ materialId }) => {
                       label="Hex Code"
                       type="color"
                       inputProps={{
-                        className: 'max-w-8',
+                        className: "max-w-8",
                       }}
                     />
                   </div>
@@ -464,10 +464,10 @@ const MaterialColors: React.FC<{ materialId: string }> = ({ materialId }) => {
 const MaterialPage = () => {
   const { id } = useParams();
   const { data, isLoading, isError, isSuccess } = useQuery({
-    queryKey: ['fashion', id],
+    queryKey: ["fashion", id],
     queryFn: async () => {
       const res = await fetch(`/admin/fashion/${id}`, {
-        credentials: 'include',
+        credentials: "include",
       });
       return res.json() as Promise<MaterialModelType>;
     },

@@ -1,8 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 import {
   QueryClient,
   QueryClientProvider as TanstackQueryClientProvider,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 

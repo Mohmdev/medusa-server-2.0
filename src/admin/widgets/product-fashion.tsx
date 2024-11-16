@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { defineWidgetConfig } from '@medusajs/admin-sdk';
-import { DetailWidgetProps, AdminProduct } from '@medusajs/framework/types';
+import * as React from "react";
+import { defineWidgetConfig } from "@medusajs/admin-sdk";
+import { DetailWidgetProps, AdminProduct } from "@medusajs/framework/types";
 import {
   Container,
   Heading,
@@ -8,20 +8,20 @@ import {
   Button,
   Drawer,
   IconButton,
-} from '@medusajs/ui';
-import { ArrowPath, PlusMini } from '@medusajs/icons';
-import { z } from 'zod';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+} from "@medusajs/ui";
+import { ArrowPath, PlusMini } from "@medusajs/icons";
+import { z } from "zod";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { MaterialModelType } from '../../modules/fashion/models/material';
+import { MaterialModelType } from "../../modules/fashion/models/material";
 
-import { Form } from '../components/Form/Form';
-import { withQueryClient } from '../components/QueryClientProvider';
+import { Form } from "../components/Form/Form";
+import { withQueryClient } from "../components/QueryClientProvider";
 import {
   useCreateColorMutation,
   useCreateMaterialMutation,
-} from '../hooks/fashion';
-import { InputField } from '../components/Form/InputField';
+} from "../hooks/fashion";
+import { InputField } from "../components/Form/InputField";
 
 // const SelectColorField: React.FC<{
 //   name: string;
@@ -108,8 +108,8 @@ const AddColorDrawer: React.FC<{
       await queryClient.invalidateQueries({
         predicate: (query) =>
           query.queryKey.length >= 3 &&
-          query.queryKey[0] === 'product' &&
-          query.queryKey[2] === 'fashion',
+          query.queryKey[0] === "product" &&
+          query.queryKey[2] === "fashion",
       });
       setIsDrawerOpen(false);
     },
@@ -134,7 +134,7 @@ const AddColorDrawer: React.FC<{
             formProps={{
               id: `material-${materialId}-add-color-${name
                 .toLowerCase()
-                .replace(/[^\w]/g, '-')}`,
+                .replace(/[^\w]/g, "-")}`,
             }}
           >
             <div className="flex flex-col gap-4">
@@ -146,7 +146,7 @@ const AddColorDrawer: React.FC<{
                 label="Hex code"
                 type="color"
                 inputProps={{
-                  className: 'max-w-8',
+                  className: "max-w-8",
                 }}
               />
             </div>
@@ -160,7 +160,7 @@ const AddColorDrawer: React.FC<{
             type="submit"
             form={`material-${materialId}-add-color-${name
               .toLowerCase()
-              .replace(/[^\w]/g, '-')}`}
+              .replace(/[^\w]/g, "-")}`}
             isLoading={createColorMutation.isPending}
             disabled={createColorMutation.isPending}
           >
@@ -175,10 +175,10 @@ const AddColorDrawer: React.FC<{
 const ProductFashionWidget = withQueryClient(
   ({ data }: DetailWidgetProps<AdminProduct>) => {
     const productFashion = useQuery({
-      queryKey: ['product', data.id, 'fashion'],
+      queryKey: ["product", data.id, "fashion"],
       queryFn: async ({ signal }) => {
         const res = await fetch(`/admin/products/${data.id}/fashion`, {
-          credentials: 'include',
+          credentials: "include",
           signal,
         });
         return res.json() as Promise<{
@@ -197,8 +197,8 @@ const ProductFashionWidget = withQueryClient(
       ...(productFashion.data?.missing_materials ?? []),
       ...(productFashion.data?.materials ?? []),
     ].sort((a, b) => {
-      const aName = typeof a === 'string' ? a : a.name;
-      const bName = typeof b === 'string' ? b : b.name;
+      const aName = typeof a === "string" ? a : a.name;
+      const bName = typeof b === "string" ? b : b.name;
 
       return aName.localeCompare(bName);
     });
@@ -233,21 +233,21 @@ const ProductFashionWidget = withQueryClient(
             <div className="flex flex-col gap-8">
               {materialsData.map((material) => (
                 <div
-                  key={typeof material === 'string' ? material : material.id}
+                  key={typeof material === "string" ? material : material.id}
                   className="flex flex-col gap-1"
                 >
                   <Text>
                     <strong
                       className={
-                        typeof material === 'string'
-                          ? 'border-b border-dashed border-ui-button-danger'
+                        typeof material === "string"
+                          ? "border-b border-dashed border-ui-button-danger"
                           : undefined
                       }
                     >
-                      {typeof material === 'string' ? material : material.name}
+                      {typeof material === "string" ? material : material.name}
                     </strong>
                   </Text>
-                  {typeof material === 'string' ? (
+                  {typeof material === "string" ? (
                     <Button
                       variant="secondary"
                       onClick={(event) => {
@@ -305,7 +305,7 @@ const ProductFashionWidget = withQueryClient(
 );
 
 export const config = defineWidgetConfig({
-  zone: 'product.details.side.before',
+  zone: "product.details.side.before",
 });
 
 export default ProductFashionWidget;

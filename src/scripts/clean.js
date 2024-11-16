@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const animateDots = (message, interval = 500) => {
   let count = 0;
   const animation = setInterval(() => {
-    process.stdout.write(`\r${message}${'.'.repeat(count % 4)}`);
+    process.stdout.write(`\r${message}${".".repeat(count % 4)}`);
     count++;
   }, interval);
   return animation;
@@ -48,11 +48,11 @@ const deleteFile = (filePath, fileName) => {
 };
 
 // Define the root directory
-const rootDir = path.resolve(__dirname, '..', '..');
+const rootDir = path.resolve(__dirname, "..", "..");
 
-console.log('Preparing workspace to update dependencies...');
+console.log("Preparing workspace to update dependencies...");
 
-deleteFolderRecursive(path.join(rootDir, 'node_modules'), 'node_modules');
-deleteFile(path.join(rootDir, 'pnpm-lock.yaml'), 'pnpm-lock.yaml');
+deleteFolderRecursive(path.join(rootDir, "node_modules"), "node_modules");
+deleteFile(path.join(rootDir, "pnpm-lock.yaml"), "pnpm-lock.yaml");
 
-console.log('Workspace is ready for fresh packages.');
+console.log("Workspace is ready for fresh packages.");

@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import FashionModuleService from '../../../modules/fashion/service';
-import { FASHION_MODULE } from '../../../modules/fashion';
+import { z } from "zod";
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import FashionModuleService from "../../../modules/fashion/service";
+import { FASHION_MODULE } from "../../../modules/fashion";
 
 const materialsListQuerySchema = z.object({
   page: z.coerce.number().min(1).optional().default(1),
@@ -24,7 +24,7 @@ export const GET = async (req: MedusaRequest, res: MedusaResponse) => {
       skip: 20 * (page - 1),
       take: 20,
       withDeleted: deleted,
-      relations: ['colors'],
+      relations: ["colors"],
     },
   );
 

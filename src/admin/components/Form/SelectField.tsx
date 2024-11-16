@@ -1,5 +1,5 @@
-import { Label, clx, Select } from '@medusajs/ui';
-import { useController, ControllerRenderProps } from 'react-hook-form';
+import { Label, clx, Select } from "@medusajs/ui";
+import { useController, ControllerRenderProps } from "react-hook-form";
 
 export interface SelectFieldProps {
   className?: string;
@@ -8,7 +8,7 @@ export interface SelectFieldProps {
   labelProps?: React.ComponentProps<typeof Label>;
   selectProps?: Omit<
     React.ComponentProps<typeof Select>,
-    'name' | 'id' | keyof ControllerRenderProps
+    "name" | "id" | keyof ControllerRenderProps
   >;
   isRequired?: boolean;
   children?: React.ReactNode;
@@ -23,20 +23,20 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   isRequired,
   children,
 }) => {
-  const { field, fieldState } = useController<{ __name__: string }, '__name__'>(
-    { name: name as '__name__' },
+  const { field, fieldState } = useController<{ __name__: string }, "__name__">(
+    { name: name as "__name__" },
   );
 
   return (
     <div className={className}>
-      {typeof label !== 'undefined' && (
+      {typeof label !== "undefined" && (
         <Label
           {...labelProps}
           htmlFor={name}
-          className={clx('block mb-1', labelProps?.className)}
+          className={clx("block mb-1", labelProps?.className)}
         >
           {label}
-          {isRequired ? <span className="text-red-500">*</span> : ''}
+          {isRequired ? <span className="text-red-500">*</span> : ""}
         </Label>
       )}
       <Select
@@ -47,7 +47,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
             field.onBlur();
           }
         }}
-        value={field.value || ''}
+        value={field.value || ""}
         name={field.name}
         required={isRequired}
       >

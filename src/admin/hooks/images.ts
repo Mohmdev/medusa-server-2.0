@@ -1,12 +1,12 @@
-import { HttpTypes } from '@medusajs/framework/types';
-import { UseMutationOptions, useMutation } from '@tanstack/react-query';
+import { HttpTypes } from "@medusajs/framework/types";
+import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 
 const getFileBase64EncodedContent = (file: File) => {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
       resolve(
-        (reader.result as string).replace('data:', '').replace(/^.+,/, ''),
+        (reader.result as string).replace("data:", "").replace(/^.+,/, ""),
       );
     };
     reader.onerror = reject;
@@ -18,7 +18,7 @@ const createPayload = async (payload: HttpTypes.AdminUploadFile) => {
   if (payload instanceof FileList) {
     const formData = new FormData();
     for (const file of payload) {
-      formData.append('files', file);
+      formData.append("files", file);
     }
     return formData;
   }
@@ -26,7 +26,7 @@ const createPayload = async (payload: HttpTypes.AdminUploadFile) => {
   if (payload.files.every((f) => f instanceof File)) {
     const formData = new FormData();
     for (const file of payload.files) {
-      formData.append('files', file);
+      formData.append("files", file);
     }
     return formData;
   }
@@ -66,12 +66,12 @@ export const useAdminUploadImage = (
     Error,
     HttpTypes.AdminUploadFile
   >({
-    mutationKey: ['admin-upload-image'],
+    mutationKey: ["admin-upload-image"],
     mutationFn: async (payload) => {
       const res = await fetch(`/admin/uploads`, {
-        method: 'POST',
+        method: "POST",
         body: await createPayload(payload),
-        credentials: 'include',
+        credentials: "include",
       });
 
       if (!res.ok) {

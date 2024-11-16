@@ -1,6 +1,6 @@
-import { Modules } from '@medusajs/framework/utils';
-import { MedusaRequest, MedusaResponse } from '@medusajs/framework';
-import { z } from 'zod';
+import { Modules } from "@medusajs/framework/utils";
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework";
+import { z } from "zod";
 
 const productTypeFieldsMetadataSchema = z.object({
   image: z

@@ -1,17 +1,17 @@
-import * as QueryConfig from './query-config';
+import * as QueryConfig from "./query-config";
 import {
   MiddlewareRoute,
   validateAndTransformQuery,
-} from '@medusajs/framework/http';
+} from "@medusajs/framework/http";
 import {
   AdminGetProductTypeParams,
   AdminGetProductTypesParams,
-} from './validators';
+} from "./validators";
 
 export const adminProductTypeRoutesMiddlewares: MiddlewareRoute[] = [
   {
-    method: ['GET'],
-    matcher: '/store/custom/product-types',
+    method: ["GET"],
+    matcher: "/store/custom/product-types",
     middlewares: [
       validateAndTransformQuery(
         AdminGetProductTypesParams,
@@ -20,8 +20,8 @@ export const adminProductTypeRoutesMiddlewares: MiddlewareRoute[] = [
     ],
   },
   {
-    method: ['GET'],
-    matcher: '/store/custom/product-types/:id',
+    method: ["GET"],
+    matcher: "/store/custom/product-types/:id",
     middlewares: [
       validateAndTransformQuery(
         AdminGetProductTypeParams,
