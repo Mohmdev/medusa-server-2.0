@@ -16,12 +16,12 @@ module.exports = defineConfig({
       adminCors: (process.env.ADMIN_CORS! as string) || 'http://localhost:9000',
       authCors: (process.env.AUTH_CORS as string) || 'http://localhost:8000,http://localhost:9000',
       // Optional
-      compression: {
-        enabled: true,
-        level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values = Slower but better compression
-        memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
-        threshold: 1024, // minimum size (in bytes) for a response to be compressed
-      },
+      // compression: {
+      //   enabled: true,
+      //   level: 6, // performance and compression ratio (0-9): Lower values = Faster but less compression | Higher values = Slower but better compression
+      //   memLevel: 7, // compression algorithm memory usage (1-9): Higher values = use 'more memory' but result in faster compression and better compression ratios
+      //   threshold: 1024, // minimum size (in bytes) for a response to be compressed
+      // },
     },
   },
   admin: {
@@ -92,6 +92,9 @@ module.exports = defineConfig({
           },
         ],
       },
+    },
+    {
+      resolve: './src/modules/fashion',
     },
   ],
 });
