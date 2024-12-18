@@ -2548,20 +2548,27 @@ __metadata:
   linkType: hard
 
 "@medusajs/admin-sdk@npm:latest":
-  version: 2.0.1
-  resolution: "@medusajs/admin-sdk@npm:2.0.1"
+  version: 2.1.2
+  resolution: "@medusajs/admin-sdk@npm:2.1.2"
   dependencies:
-    "@medusajs/admin-shared": "npm:^2.0.1"
+    "@medusajs/admin-shared": "npm:^2.1.2"
   peerDependencies:
     zod: ^3.22
-  checksum: 10c0/317d8577289034d3c0fbd78e88d9e3cb69619a183d1497376062ba6ddd5fab7db8d9e9493732c601e21d3504afa0c614645456a9abce9c08f5196748cfd83642
+  checksum: 10c0/6eed3b4ac0f385a4e05caff3e37c8a5dcc10f2060dddddbe9e3ed31bf1c9ec50b6e3af51747a36fcd4de498f9b1ba8453a38a1e7de77b3728278865f660a93f3
   languageName: node
   linkType: hard
 
-"@medusajs/admin-shared@npm:2.0.1, @medusajs/admin-shared@npm:^2.0.1":
+"@medusajs/admin-shared@npm:2.0.1":
   version: 2.0.1
   resolution: "@medusajs/admin-shared@npm:2.0.1"
   checksum: 10c0/41e2a4d16d1694d72b10b67687a79255b21176ef4aceb350098fd3d6ea6286e54310b715a98a6b1d220c199f9def6acfc31a28a89da887f8c78001b44d845f5f
+  languageName: node
+  linkType: hard
+
+"@medusajs/admin-shared@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@medusajs/admin-shared@npm:2.1.2"
+  checksum: 10c0/ac0bf25a402c6dfb27f58689110437e46f33c7740e4402354a2762487dc93caa7ab1a927c573b19112675ef9d2f9fa6f68d33ca7537d761892e3c069723161c1
   languageName: node
   linkType: hard
 
